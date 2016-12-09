@@ -6,17 +6,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ASProjectProjector.Models
 {
-  public class County
+  public class ProjectType
   {
     [Key]
-    public int CountyId {get;set;}
+    public int ProjectTypeId {get;set;}
     [Required]
     public string Name {get;set;}
-    [Required]
-    public double AdditionalCostsId {get;set;}
-    [Required]
-    public double HomesFigure {get;set;}
-    [Required]
-    public int TotalWorkCrews {get;set;}
+    public ICollection<Material> Materials {get;set;}
   }
 }

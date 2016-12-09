@@ -6,13 +6,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ASProjectProjector.Models
 {
-  public class Budget
+  public class ProductTypeMaterial
   {
     [Key]
-    public int BudgetId {get;set;}
+    public int ProductTypeMaterialId {get;set;}
     [Required]
-    public int CountyId {get;set;}
+    public int ProductTypeId {get;set;}
     [Required]
-    public double Total {get;set;}
+    public int MaterialId {get;set;}
+    
   }
 }

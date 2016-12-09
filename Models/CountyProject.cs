@@ -6,17 +6,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ASProjectProjector.Models
 {
-  public class Project
+  public class CountyProject
   {
     [Key]
-    public int ProjectId {get;set;}
+    public int CountyProjectId {get;set;}
     [Required]
-    public int LengthInDays {get;set;}
+    public int ProjectTypeId {get;set;}
+    [Required]
+    public int EstimatedLengthInDays {get;set;}
     [Required]
     public string FamilyName {get;set;}
     [Required]
     public bool Active {get;set;}
     [Required]
-    public int CountyId {get;set;}
+    public ApplicationUser User { get; set; }
   }
 }
