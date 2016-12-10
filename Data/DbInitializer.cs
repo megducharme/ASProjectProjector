@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ASProjectProjector.Models;
 using ASProjectProjector.Data;
 
-namespace BangazonDelta.Data
+namespace ASProjectProjector.Data
 {
     public static class DbInitializer
     {
@@ -13,7 +13,7 @@ namespace BangazonDelta.Data
         {
             using (var context = new ApplicationDbContext(serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
             {
-              // Look for any products.
+              // Look for any materials. 
               if (context.Material.Any())
               {
                   return;   // DB has been seeded
@@ -28,9 +28,29 @@ namespace BangazonDelta.Data
                       CountSqFt = 15
                   },
                   new Material {
-                      Name = "Roof Decking Screws",
-                      CostSqFt = 3.50,
+                      Name = "4x8 1/2 Drywall",
+                      CostSqFt = 12.00,
+                      CountSqFt = 1
+                  },
+                  new Material {
+                      Name = " 1 1/2 Drywall Screws",
+                      CostSqFt = 2.00,
                       CountSqFt = 15
+                  },
+                  new Material {
+                      Name = "Joint Compound",
+                      CostSqFt = 0.50,
+                      CountSqFt = 0
+                  },
+                  new Material {
+                      Name = "Drywall Tape",
+                      CostSqFt = 1.15,
+                      CountSqFt = 0
+                  },
+                  new Material {
+                      Name = "120 grit Sandpaper",
+                      CostSqFt = 1.50,
+                      CountSqFt = 0
                   }
               };
               foreach (Material i in materials)
@@ -40,70 +60,27 @@ namespace BangazonDelta.Data
               context.SaveChanges();
 
               //SEEDED PROJECTS
-              var projects = new Project[]
+              var projecttypes = new ProjectType[]
               {
-                  new Project {
-                      Name = "Drywall",
-                      EstimatedLengthInDays = 5,
-                      FamilyName = "Blankenship",
-                      Active = false,
-                      User = 
-                  }
-                  new Project {
-                      Name 
-                  }
-
-                  }
-              }
-
-            
-               
-              //   SUBCATEGORIES. MD - Seeding the database.
-              var productSubType = new ProductSubType[]
-              {
-                  new ProductSubType { 
-                      Name = "Pencils",
-                      ProductTypeId = 3
+                  new ProjectType {
+                      Name = "Drywall"
                   },
-                  new ProductSubType { 
-                      Name = "Pens",
-                      ProductTypeId = 3
+                  new ProjectType {
+                      Name = "Drainage Ditch"
                   },
-                  new ProductSubType { 
-                      Name = "Office Equipment",
-                      ProductTypeId = 3
+                  new ProjectType {
+                      Name = "Roofing"
                   },
-                  new ProductSubType { 
-                      Name = "Music",
-                      ProductTypeId = 1
-                  },
-                  new ProductSubType { 
-                      Name = "Appliances",
-                      ProductTypeId = 1
-                  },
-                  new ProductSubType { 
-                      Name = "Phones",
-                      ProductTypeId = 1
-                  },
-                  new ProductSubType { 
-                      Name = "Treats",
-                      ProductTypeId = 2
-                  },
-                  new ProductSubType { 
-                      Name = "Bedding",
-                      ProductTypeId = 2
-                  },
-                  new ProductSubType { 
-                      Name = "Toys",
-                      ProductTypeId = 2
+                  new ProjectType{
+                      Name = "Floor Covering"
                   }
               };
-              foreach (ProductSubType i in productSubType)
-              {
-                  context.ProductSubType.Add(i);
-              }
-              context.SaveChanges();
-          }
-       }
+                foreach (ProjectType i in projecttypes)
+                {
+                    context.ProjectType.Add(i);
+                }
+                context.SaveChanges();
+            }
+        }
     }
 }

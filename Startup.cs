@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using ASProjectProjector.Data;
 using ASProjectProjector.Models;
 using ASProjectProjector.Services;
+using ASProjectProjector.Data;
 
 namespace ASProjectProjector
 {
@@ -40,14 +41,19 @@ namespace ASProjectProjector
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            // services.AddDbContext<ApplicationDbContext>(options =>
+            //     options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+
+            string path = System.Environment.GetEnvironmentVariable("ASProjectProjector_Db_Path");
+            var connection = $"Filename={path}";
+            Console.WriteLine($"connection = {connection}");
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connection));
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -74,6 +80,8 @@ namespace ASProjectProjector
             app.UseStaticFiles();
 
             app.UseIdentity();
+
+            // DbInitializer.Initialize(app.ApplicationServices);
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 

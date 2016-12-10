@@ -20,9 +20,5 @@ namespace ASProjectProjector.Models
         [Required]
         [DisplayFormat(DataFormatString = "{0:C}")]
         public double TotalBudget {get;set;}
-        public ICollection<Project> Projects { get; set; }
-        public ICollection<AdditionalCost> AdditionalCost { get; set; }
-        public ICollection<RestrictedCounty> RestrictedCounty { get; set; }
-
     }
 }

@@ -6,12 +6,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ASProjectProjector.Models
 {
-  public class ProductTypeMaterial
+  public class ProjectTypeMaterial
   {
     [Key]
-    public int ProductTypeMaterialId {get;set;}
+    public int ProjectTypeMaterialId {get;set;}
     [Required]
-    public int ProductTypeId {get;set;}
+    public int ProjectTypeId {get;set;}
     [Required]
     public int MaterialId {get;set;}
     
