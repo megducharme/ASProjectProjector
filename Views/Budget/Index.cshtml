@@ -1,0 +1,26 @@
+@model ASProjectProjector.ViewModels.BudgetDetailViewModel
+
+@{
+    ViewData["Title"] = "All Project Types";
+}
+
+<br>
+<h2>@ViewData["Title"]</h2>
+
+<hr/>
+
+<h4>Project Types</h4>
+@foreach (var item in Model.ProjectType)
+{
+    <div class="row">
+        <div class="col-md-3">@Html.DisplayFor(modelItem => item.Name)</div>
+    </div>
+}
+
+<h4>Materials</h4>
+@foreach (var item in Model.Material)
+{
+    <div class="row">
+        <div class="col-md-3">@Html.DisplayFor(modelItem => item.Name)</div>
+    </div>
+}
