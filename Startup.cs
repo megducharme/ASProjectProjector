@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 using ASProjectProjector.Data;
 using ASProjectProjector.Models;
 using ASProjectProjector.Services;
-using ASProjectProjector.Data;
 
 namespace ASProjectProjector
 {

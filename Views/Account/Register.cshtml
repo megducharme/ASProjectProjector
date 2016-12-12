@@ -9,6 +9,21 @@
     <h4>Create a new account.</h4>
     <hr />
     <div asp-validation-summary="All" class="text-danger"></div>
+    
+    <div class="form-group">
+        <label asp-for="CountyName" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="CountyName" class="form-control" />
+            <span asp-validation-for="CountyName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="HomesFigure" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="HomesFigure" class="form-control" />
+            <span asp-validation-for="HomesFigure" class="text-danger"></span>
+        </div>
+    </div>
     <div class="form-group">
         <label asp-for="Email" class="col-md-2 control-label"></label>
         <div class="col-md-10">

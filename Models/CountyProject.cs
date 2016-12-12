@@ -13,6 +13,8 @@ namespace ASProjectProjector.Models
     [Required]
     public int ProjectTypeId {get;set;}
     [Required]
+    public string CodeName {get;set;}
+    [Required]
     public int EstimatedLengthInDays {get;set;}
     [Required]
     public string FamilyName {get;set;}
@@ -20,5 +22,7 @@ namespace ASProjectProjector.Models
     public bool Active {get;set;}
     [Required]
     public ApplicationUser User { get; set; }
+    [Required]
+    public double ProjectSqFt {get;set;}
   }
 }

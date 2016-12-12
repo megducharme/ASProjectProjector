@@ -7,7 +7,6 @@ using ASProjectProjector.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ASProjectProjector.ViewModels;
 using System.Collections.Generic;
-using ASProjectProjector.Models;
 using ASProjectProjector.Models.AccountViewModels;
 using ASProjectProjector.Services;
 using Microsoft.AspNetCore.Identity;
@@ -18,18 +17,13 @@ namespace ASProjectProjector.Controllers
     public class BudgetController : Controller
     {
         private ApplicationDbContext context;
-        // Private variable for userManager helper function
         private readonly UserManager<ApplicationUser> _userManager;
-
-        //Constructor functions that takes both context AND the userManager object
-        //and sets them to the private variables above
         public BudgetController(UserManager<ApplicationUser> userManager, ApplicationDbContext ctx)
         {
             _userManager = userManager;
             context = ctx;
         }
 
-        // This task retrieves the currently authenticated user
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         public async Task<IActionResult> Index()

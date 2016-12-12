@@ -1,4 +1,4 @@
-@model ASProjectProjector.ViewModels.CreateProjectViewModel
+@model ASProjectProjector.ViewModels.CreateCountyProjectViewModel
 
 @{
     ViewData["Title"] = "Get Project Projection";
@@ -7,68 +7,70 @@
 <br>
 <h2>@ViewData["Title"]</h2>
 
-<form asp-action="Create">
+<form asp-action="Save">
     <div class="form-horizontal">
         <hr />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
         <div class="form-group">
-            <label asp-for="@Model.CountyProject.ProjectType" class="col-md-2 control-label"></label>
+            <label asp-for="@Model.CountyProject.CodeName" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="@Model.CountyProject.ProjectType" class="form-control" />
-                <span asp-validation-for="@Model.CountyProject.ProjectType" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="@Model.Product.Description" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="@Model.Product.Description" class="form-control" />
-                <span asp-validation-for="@Model.Product.Description" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="@Model.Product.Price" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="@Model.Product.Price" class="form-control" type="number" step="0.01"/>
-                <span asp-validation-for="@Model.Product.Price" class="text-danger" />
-                
+                <input asp-for="@Model.CountyProject.CodeName" class="form-control" />
+                <span asp-validation-for="@Model.CountyProject.CodeName" class="text-danger" />
             </div>
         </div>
 
-
-
-        <!--type dropdown-->
         <div class="form-group">
-            <label asp-for="@Model.Product.ProductTypeId" class="col-md-2 control-label">Product Type</label>
+            <label asp-for="@Model.CountyProject.FamilyName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="@Model.CountyProject.FamilyName" class="form-control" />
+                <span asp-validation-for="@Model.CountyProject.FamilyName" class="text-danger" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.CountyProject.EstimatedLengthInDays" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="@Model.CountyProject.EstimatedLengthInDays" class="form-control" />
+                <span asp-validation-for="@Model.CountyProject.EstimatedLengthInDays" class="text-danger" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.CountyProject.ProjectSqFt" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="@Model.CountyProject.ProjectSqFt" class="form-control" />
+                <span asp-validation-for="@Model.CountyProject.ProjectSqFt" class="text-danger" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.CountyProject.Active" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="@Model.CountyProject.Active" class="form-control" />
+                <span asp-validation-for="@Model.CountyProject.Active" class="text-danger" />
+            </div>
+        </div>
+
+        <!--project type dropdown-->
+        <div class="form-group">
+            <label asp-for="@Model.CountyProject.ProjectTypeId" class="col-md-2 control-label">Project Type</label>
                 <div class="col-md-10">
                     @Html.DropDownList(
-                        "Product.ProductTypeId", 
-                        @Model.ProductTypeId, 
+                        "CountyProject.ProjectTypeId", 
+                        @Model.ProjectTypeId, 
                         new {
-                            @name="Product.ProductTypeId",
-                            @class="ProductTypeId form-control"
+                            @class="ProjectTypeId form-control"
                         }
                     )
-                    <span asp-validation-for="@Model.Product.ProductTypeId" />
+                    <span asp-validation-for="@Model.CountyProject.ProjectTypeId" />
                 </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="@Model.Product.ProductSubTypeId" class="subDropdownLabel col-md-2 control-label">Product Subtype</label>
-                <div class="col-md-10">
-                    @Html.DropDownList("Product.ProductSubTypeId", new List<SelectListItem>(), new {@class="ProductSubTypeId form-control"} )
-                    <span asp-validation-for="@Model.Product.ProductSubTypeId" />  
-                </div>
-        </div>
-            
-        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
 
     </div>
 </form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>

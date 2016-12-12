@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ASProjectProjector.Migrations
 {
-    public partial class NewMigration13 : Migration
+    public partial class NewMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,7 +42,7 @@ namespace ASProjectProjector.Migrations
                     PhoneNumber = table.Column<string>(nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(nullable: false),
                     SecurityStamp = table.Column<string>(nullable: true),
-                    TotalBudget = table.Column<double>(nullable: false),
+                    TotalBudget = table.Column<double>(nullable: true),
                     TotalWorkCrews = table.Column<int>(nullable: false),
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     UserName = table.Column<string>(maxLength: 256, nullable: true)
@@ -114,8 +114,10 @@ namespace ASProjectProjector.Migrations
                     CountyProjectId = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
                     Active = table.Column<bool>(nullable: false),
+                    CodeName = table.Column<string>(nullable: false),
                     EstimatedLengthInDays = table.Column<int>(nullable: false),
                     FamilyName = table.Column<string>(nullable: false),
+                    ProjectSqFt = table.Column<double>(nullable: false),
                     ProjectTypeId = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: false)
                 },

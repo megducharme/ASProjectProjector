@@ -8,8 +8,8 @@ using ASProjectProjector.Data;
 namespace ASProjectProjector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161211015545_NewMigration13")]
-    partial class NewMigration13
+    [Migration("20161212185227_NewMigrations")]
+    partial class NewMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,9 +70,10 @@ namespace ASProjectProjector.Migrations
 
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<double>("TotalBudget");
+                    b.Property<double?>("TotalBudget");
 
-                    b.Property<int>("TotalWorkCrews");
+                    b.Property<int?>("TotalWorkCrews")
+                        .IsRequired();
 
                     b.Property<bool>("TwoFactorEnabled");
 
@@ -98,10 +99,15 @@ namespace ASProjectProjector.Migrations
 
                     b.Property<bool>("Active");
 
+                    b.Property<string>("CodeName")
+                        .IsRequired();
+
                     b.Property<int>("EstimatedLengthInDays");
 
                     b.Property<string>("FamilyName")
                         .IsRequired();
+
+                    b.Property<double>("ProjectSqFt");
 
                     b.Property<int>("ProjectTypeId");
 

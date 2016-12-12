@@ -1,0 +1,29 @@
+@model ASProjectProjector.ViewModels.AllProjectsViewModel
+
+@{
+    ViewData["Title"] = "All Projects";
+}
+
+<br>
+<h2>@ViewData["Title"]</h2>
+
+<hr/>
+
+<h3>Active Projects</h3>
+    @foreach (var item in Model.CountyProjectActive)
+    {
+        <div class="row">
+            <div class="col-md-3">@Html.DisplayFor(modelItem => item.CodeName)</div>
+        </div>
+    }
+
+<br>
+<hr>
+
+<h3>Saved Projects</h3>
+    @foreach (var item in Model.CountyProjectInactive)
+    {
+        <div class="row">
+            <div class="col-md-3">@Html.DisplayFor(modelItem => item.CodeName)</div>
+        </div>
+    }

@@ -7,7 +7,6 @@ using ASProjectProjector.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ASProjectProjector.ViewModels;
 using System.Collections.Generic;
-using ASProjectProjector.Models;
 using ASProjectProjector.Models.AccountViewModels;
 using ASProjectProjector.Services;
 using Microsoft.AspNetCore.Identity;
@@ -27,16 +26,58 @@ namespace ASProjectProjector.Controllers
 
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Index()
         {
-            var model = new BudgetDetailViewModel();
-            model.ProjectType = await context.ProjectType
-                            .OrderBy(l => l.Name).ToListAsync();
+            var model = new AllProjectsViewModel();
+            model.CountyProjectActive = await context.CountyProject
+                            .Where(l => l.Active == true)
+                            .OrderBy(l => l.CodeName).ToListAsync();
 
-            model.Material = await context.Material
-                            .OrderBy(l => l.Name).ToListAsync();
+            model.CountyProjectInactive = await context.CountyProject
+                            .Where(l => l.Active == false)
+                            .OrderBy(l => l.CodeName).ToListAsync();
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            var ProjectTypesIdDropDown = context.ProjectType
+                                       .OrderBy(l => l.Name)
+                                       .AsEnumerable()
+                                       .Select(li => new SelectListItem { 
+                                           Text = li.Name,
+                                           Value = li.ProjectTypeId.ToString()
+                                        }).ToList();
+            
+            ProjectTypesIdDropDown.Insert(0, new SelectListItem{
+                Text = "Project Type",
+                Value = 0.ToString()
+            });
+
+            var model = new CreateCountyProjectViewModel();
+            model.ProjectTypeId = ProjectTypesIdDropDown;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Save(CountyProject countyProject)
+        {
+            
+            ModelState.Remove("countyProject.User");
+
+            if (ModelState.IsValid)
+            {
+                var user = await GetCurrentUserAsync();
+                countyProject.User = user;
+
+                context.Add(countyProject);
+
+                await context.SaveChangesAsync();
+            }
+                return RedirectToAction("Index");
         }
     }
 }
