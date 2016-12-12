@@ -115,6 +115,8 @@ namespace ASProjectProjector.Migrations
 
                     b.HasKey("CountyProjectId");
 
+                    b.HasIndex("ProjectTypeId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("CountyProject");
@@ -165,7 +167,7 @@ namespace ASProjectProjector.Migrations
 
                     b.HasKey("ProjectTypeMaterialId");
 
-                    b.ToTable("ProductTypeMaterial");
+                    b.ToTable("ProjectTypeMaterial");
                 });
 
             modelBuilder.Entity("ASProjectProjector.Models.RestrictedCounty", b =>
@@ -297,6 +299,11 @@ namespace ASProjectProjector.Migrations
 
             modelBuilder.Entity("ASProjectProjector.Models.CountyProject", b =>
                 {
+                    b.HasOne("ASProjectProjector.Models.ProjectType", "ProjectType")
+                        .WithMany()
+                        .HasForeignKey("ProjectTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("ASProjectProjector.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")

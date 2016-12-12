@@ -81,30 +81,30 @@ namespace ASProjectProjector.Data
                 }
                 context.SaveChanges();
 
-            // var materialsForProjects = new ProjectTypeMaterial[]
-            // {
-            //     new ProjectTypeMaterial {
-            //         ProjectTypeId = 1,
-            //         MaterialId = 1
-            //     },
-            //     new ProjectTypeMaterial {
-            //         ProjectTypeId = 1,
-            //         MaterialId = 2
-            //     },
-            //     new ProjectTypeMaterial {
-            //         ProjectTypeId = 1,
-            //         MaterialId = 3
-            //     },
-            //     new ProjectTypeMaterial {
-            //         ProjectTypeId = 1,
-            //         MaterialId = 4
-            //     }
-            // };
-            // foreach (ProjectTypeMaterial in materialsForProjects)
-            // {
-            //     context.ProjectTypeMaterial.Add(i);
-            // }
-            // context.SaveChanges();
+            var materialsForProjects = new ProjectTypeMaterial[]
+            {
+                new ProjectTypeMaterial {
+                    ProjectTypeId = 1,
+                    MaterialId = 1
+                },
+                new ProjectTypeMaterial {
+                    ProjectTypeId = 1,
+                    MaterialId = 2
+                },
+                new ProjectTypeMaterial {
+                    ProjectTypeId = 1,
+                    MaterialId = 3
+                },
+                new ProjectTypeMaterial {
+                    ProjectTypeId = 1,
+                    MaterialId = 4
+                }
+            };
+            foreach (ProjectTypeMaterial i in materialsForProjects)
+            {
+                context.ProjectTypeMaterial.Add(i);
+            }
+            context.SaveChanges();
             }
         }
     }

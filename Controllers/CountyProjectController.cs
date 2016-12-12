@@ -62,6 +62,34 @@ namespace ASProjectProjector.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> Detail([FromRoute]int? id)
+        {
+            // If no id was in the route, return 404
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var project = await context.CountyProject
+                    .Include(s => s.User)
+                    .SingleOrDefaultAsync(m => m.CountyProjectId == id);
+
+            // If product not found, return 404
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            var projectTypeName = await context.ProjectType
+                    .SingleOrDefaultAsync(m => m.ProjectTypeId == project.ProjectTypeId);
+
+            ProjectDetailViewModel model = new ProjectDetailViewModel();
+            model.CountyProject = project;
+            model.ProjectType = projectTypeName;
+
+            return View(model);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Save(CountyProject countyProject)
         {

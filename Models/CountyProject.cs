@@ -12,6 +12,7 @@ namespace ASProjectProjector.Models
     public int CountyProjectId {get;set;}
     [Required]
     public int ProjectTypeId {get;set;}
+    public ProjectType ProjectType {get;set;}
     [Required]
     public string CodeName {get;set;}
     [Required]

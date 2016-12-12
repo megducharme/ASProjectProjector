@@ -66,7 +66,7 @@ namespace ASProjectProjector.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductTypeMaterial",
+                name: "ProjectTypeMaterial",
                 columns: table => new
                 {
                     ProjectTypeMaterialId = table.Column<int>(nullable: false)
@@ -76,7 +76,7 @@ namespace ASProjectProjector.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductTypeMaterial", x => x.ProjectTypeMaterialId);
+                    table.PrimaryKey("PK_ProjectTypeMaterial", x => x.ProjectTypeMaterialId);
                 });
 
             migrationBuilder.CreateTable(
@@ -105,31 +105,6 @@ namespace ASProjectProjector.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CountyProject",
-                columns: table => new
-                {
-                    CountyProjectId = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
-                    Active = table.Column<bool>(nullable: false),
-                    CodeName = table.Column<string>(nullable: false),
-                    EstimatedLengthInDays = table.Column<int>(nullable: false),
-                    FamilyName = table.Column<string>(nullable: false),
-                    ProjectSqFt = table.Column<double>(nullable: false),
-                    ProjectTypeId = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CountyProject", x => x.CountyProjectId);
-                    table.ForeignKey(
-                        name: "FK_CountyProject_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -188,6 +163,37 @@ namespace ASProjectProjector.Migrations
                     table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
                     table.ForeignKey(
                         name: "FK_AspNetUserLogins_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CountyProject",
+                columns: table => new
+                {
+                    CountyProjectId = table.Column<int>(nullable: false)
+                        .Annotation("Autoincrement", true),
+                    Active = table.Column<bool>(nullable: false),
+                    CodeName = table.Column<string>(nullable: false),
+                    EstimatedLengthInDays = table.Column<int>(nullable: false),
+                    FamilyName = table.Column<string>(nullable: false),
+                    ProjectSqFt = table.Column<double>(nullable: false),
+                    ProjectTypeId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CountyProject", x => x.CountyProjectId);
+                    table.ForeignKey(
+                        name: "FK_CountyProject_ProjectType_ProjectTypeId",
+                        column: x => x.ProjectTypeId,
+                        principalTable: "ProjectType",
+                        principalColumn: "ProjectTypeId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CountyProject_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -273,6 +279,11 @@ namespace ASProjectProjector.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_CountyProject_ProjectTypeId",
+                table: "CountyProject",
+                column: "ProjectTypeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CountyProject_UserId",
                 table: "CountyProject",
                 column: "UserId");
@@ -330,7 +341,7 @@ namespace ASProjectProjector.Migrations
                 name: "Material");
 
             migrationBuilder.DropTable(
-                name: "ProductTypeMaterial");
+                name: "ProjectTypeMaterial");
 
             migrationBuilder.DropTable(
                 name: "RestrictedCounty");
