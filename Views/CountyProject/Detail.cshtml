@@ -1,0 +1,29 @@
+@model ASProjectProjector.ViewModels.ProjectDetailViewModel
+
+@{
+    ViewData["Title"] = "Project Details";
+}
+
+<br/>
+<h2>@Html.DisplayFor(model => model.CountyProject.CodeName)</h2>
+<h2>@Html.DisplayFor(model => model.ProjectType.Name)</h2>
+
+@if (@Model.CountyProject.Active){
+<div>
+    <span class="input-group-btn">
+        <button type="button" class="btn btn-default">Deactivate</button>
+    </span>
+</div>
+}else { 
+<div class="row">
+    <span class="input-group-btn">
+        <button type="button" class="btn btn-default">Activate</button>
+    </span>
+</div>
+}
+
+
+
+<div>
+    County @Html.DisplayFor(model => model.User.CountyName)
+</div>

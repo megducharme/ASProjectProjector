@@ -26,7 +26,7 @@ namespace ASProjectProjector.Data
         public DbSet<AdditionalCost> AdditionalCost { get; set; }
         public DbSet<ProjectType> ProjectType { get; set; }
         public DbSet<Material> Material { get; set; }
-        public DbSet<ProjectTypeMaterial> ProductTypeMaterial { get; set; }
+        public DbSet<ProjectTypeMaterial> ProjectTypeMaterial { get; set; }
         public DbSet<RestrictedCounty> RestrictedCounty { get; set; }
         public DbSet<CountyProject> CountyProject {get;set;}
     }
