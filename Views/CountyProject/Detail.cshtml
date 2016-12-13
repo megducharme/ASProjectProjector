@@ -8,7 +8,7 @@
 <h2>@Html.DisplayFor(model => model.CountyProject.CodeName)</h2>
 <h2>@Html.DisplayFor(model => model.ProjectType.Name)</h2>
 
-@if (@Model.CountyProject.Active){
+@if (@Model.CountyProject.Active) {
     
 <form asp-action="Activate">
     <div class="form-group">
@@ -18,7 +18,7 @@
     </div>
 </form>
 
-}else { 
+} else { 
 
 <form asp-action="Activate">
     <div class="form-group">
@@ -30,7 +30,12 @@
 
 }
 
+<br>
+<hr>
+@using (Html.BeginForm("Delete", "CountyProject"))
+{
+    <div class="col-md-offset-2 col-md-10 form-group">
+        <input type="submit" value="Delete" class="btn btn-default" />
+    </div>
 
-<div>
-    County @Html.DisplayFor(model => model.User.CountyName)
-</div>
+}

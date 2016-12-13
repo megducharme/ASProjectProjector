@@ -91,6 +91,7 @@ namespace ASProjectProjector.Controllers
             return View(model);
         }
 
+        [RouteAttribute("CountyProject/Activate/{id}")]
         [HttpPost("{id}")]
         public async Task<IActionResult> Activate([FromRoute]int? id)
         {
@@ -99,6 +100,20 @@ namespace ASProjectProjector.Controllers
                 project.Active = !project.Active;
 
                 context.Update(project);
+
+                await context.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+        }
+
+        [RouteAttribute("CountyProject/Delete/{id}")]
+        [HttpPost("{id}")]
+        public async Task<IActionResult> Delete([FromRoute]int? id)
+        {
+            var project = await context.CountyProject
+                .Where(l => l.CountyProjectId == id).SingleOrDefaultAsync();
+
+                context.Remove(project);
 
                 await context.SaveChangesAsync();
 
