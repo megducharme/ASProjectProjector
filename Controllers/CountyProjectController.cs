@@ -91,6 +91,34 @@ namespace ASProjectProjector.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> Zoom([FromRoute]int? id)
+        {
+            // If no id was in the route, return 404
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var project = await context.CountyProject
+                    .Include(s => s.User)
+                    .SingleOrDefaultAsync(m => m.CountyProjectId == id);
+
+            // If product not found, return 404
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            var projectTypeName = await context.ProjectType
+                    .SingleOrDefaultAsync(m => m.ProjectTypeId == project.ProjectTypeId);
+
+            ProjectDetailViewModel model = new ProjectDetailViewModel();
+            model.CountyProject = project;
+            model.ProjectType = projectTypeName;
+
+            return View(model);
+        }
+
         [HttpPost("{id}")]
         public async Task<IActionResult> Activate([FromRoute]int? id)
         {
@@ -99,6 +127,20 @@ namespace ASProjectProjector.Controllers
                 project.Active = !project.Active;
 
                 context.Update(project);
+
+                await context.SaveChangesAsync();
+
+                // return RedirectToAction("Index");
+                return Ok();
+        }
+
+        [HttpPost("{id}")]
+        public async Task<IActionResult> Delete([FromRoute]int? id)
+        {
+            var project = await context.CountyProject
+                .Where(l => l.CountyProjectId == id).SingleOrDefaultAsync();
+
+                context.Remove(project);
 
                 await context.SaveChangesAsync();
 
