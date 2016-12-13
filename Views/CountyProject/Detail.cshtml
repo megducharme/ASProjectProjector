@@ -9,19 +9,26 @@
 <h2>@Html.DisplayFor(model => model.ProjectType.Name)</h2>
 
 @if (@Model.CountyProject.Active){
-<div>
-    <span class="input-group-btn">
-        <button type="button" class="btn btn-default">Deactivate</button>
-    </span>
-</div>
-}else { 
-<div class="row">
-    <span class="input-group-btn">
-        <button type="button" class="btn btn-default">Activate</button>
-    </span>
-</div>
-}
+    
+<form asp-action="Activate">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Deactivate" class="btn btn-default" />
+        </div>
+    </div>
+</form>
 
+}else { 
+
+<form asp-action="Activate">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Activate" class="btn btn-default" />
+        </div>
+    </div>
+</form>
+
+}
 
 
 <div>

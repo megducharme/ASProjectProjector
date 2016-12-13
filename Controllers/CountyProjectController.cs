@@ -26,6 +26,7 @@ namespace ASProjectProjector.Controllers
 
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var model = new AllProjectsViewModel();
@@ -90,6 +91,20 @@ namespace ASProjectProjector.Controllers
             return View(model);
         }
 
+        [HttpPost("{id}")]
+        public async Task<IActionResult> Activate([FromRoute]int? id)
+        {
+            var project = await context.CountyProject
+                .Where(l => l.CountyProjectId == id).SingleOrDefaultAsync();
+                project.Active = !project.Active;
+
+                context.Update(project);
+
+                await context.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+        }
+
         [HttpPost]
         public async Task<IActionResult> Save(CountyProject countyProject)
         {
@@ -105,7 +120,7 @@ namespace ASProjectProjector.Controllers
 
                 await context.SaveChangesAsync();
             }
-                return RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
     }
 }
