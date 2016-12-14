@@ -30,6 +30,13 @@
 
 }
 
+@foreach (var item in Model.MaterialList)
+{
+    <div class="row">
+        <div class="col-md-12">@Html.DisplayFor(modelItem => item.Name)</div>
+    </div>
+}
+
 <br>
 <hr>
 @using (Html.BeginForm("Delete", "CountyProject"))

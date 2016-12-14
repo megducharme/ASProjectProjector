@@ -48,3 +48,8 @@ textarea {
     display: none
   }
 }
+
+.projDescription
+{
+    text-align: center;
+}

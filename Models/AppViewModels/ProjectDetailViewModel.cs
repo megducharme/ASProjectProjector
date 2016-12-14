@@ -9,5 +9,6 @@ namespace ASProjectProjector.ViewModels
         public CountyProject CountyProject {get;set;}
         public ApplicationUser User {get;set;}
         public ProjectType ProjectType {get;set;}
+        public List<Material> MaterialList {get;set;}
     }
 }

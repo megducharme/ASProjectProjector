@@ -8,28 +8,40 @@
 <h2>@ViewData["Title"]</h2>
 
 <hr/>
-
 <h3>Active Projects</h3>
-    @foreach (var item in Model.CountyProjectActive)
-    {
-        <div class="row">
-            <div class="col-md-3"><a asp-action="Detail" asp-route-id="@item.CountyProjectId">@Html.DisplayFor(modelItem => item.CodeName)</a></div>
-            <div class="col-md-3">@Html.DisplayFor(modelItem => item.ProjectType.Name)</div>
-            <div class="col-md-3">@Html.DisplayFor(modelItem => item.EstimatedLengthInDays)</div>
-            <div class="col-md-3">@Html.DisplayFor(modelItem => item.FamilyName)</div>
-        </div>
-    }
+<div class="row">
+    <div class ="col-md-3"><h5>Project Code Name</h5></div>
+    <div class ="col-md-3 projDescription"><h5>Project Type</h5></div>
+    <div class ="col-md-3 projDescription"><h5>Length In Days</h5></div>
+    <div class ="col-md-3 projDescription"><h5>Family Name</h5></div>
+</div>
+
+@foreach (var item in Model.CountyProjectActive)
+{
+    <div class="row">
+        <div class="col-md-3"><a asp-action="Detail" asp-route-id="@item.CountyProjectId">@Html.DisplayFor(modelItem => item.CodeName)</a></div>
+        <div class="col-md-3">@Html.DisplayFor(modelItem => item.ProjectType.Name)</div>
+        <div class="col-md-3 projDescription">@Html.DisplayFor(modelItem => item.EstimatedLengthInDays)</div>
+        <div class="col-md-3 projDescription">@Html.DisplayFor(modelItem => item.FamilyName)</div>
+    </div>
+}
 
 <br>
 <hr>
 
 <h3>Saved Projects</h3>
+<div class="row">
+    <div class ="col-md-3"><h5>Project Code Name</h5></div>
+    <div class ="col-md-3 projDescription"><h5>Project Type</h5></div>
+    <div class ="col-md-3 projDescription"><h5>Length In Days</h5></div>
+    <div class ="col-md-3 projDescription"><h5>Family Name</h5></div>
+</div>
     @foreach (var item in Model.CountyProjectInactive)
     {
         <div class="row">
             <div class="col-md-3"><a asp-action="Detail" asp-route-id="@item.CountyProjectId">@Html.DisplayFor(modelItem => item.CodeName)</a></div>
             <div class="col-md-3">@Html.DisplayFor(modelItem => item.ProjectType.Name)</div>
-            <div class="col-md-3">@Html.DisplayFor(modelItem => item.EstimatedLengthInDays)</div>
-            <div class="col-md-3">@Html.DisplayFor(modelItem => item.FamilyName)</div>
+            <div class="col-md-3 projDescription">@Html.DisplayFor(modelItem => item.EstimatedLengthInDays)</div>
+            <div class="col-md-3 projDescription">@Html.DisplayFor(modelItem => item.FamilyName)</div>
         </div>
     }

@@ -62,7 +62,8 @@ namespace ASProjectProjector.Controllers
 
             return View(model);
         }
-
+        [HttpGet]
+        [RouteAttribute("/Detail/{id}")]
         public async Task<IActionResult> Detail([FromRoute]int? id)
         {
             // If no id was in the route, return 404
@@ -71,22 +72,27 @@ namespace ASProjectProjector.Controllers
                 return NotFound();
             }
 
-            var project = await context.CountyProject
-                    .Include(s => s.User)
-                    .SingleOrDefaultAsync(m => m.CountyProjectId == id);
+            ProjectDetailViewModel model = new ProjectDetailViewModel();
 
-            // If product not found, return 404
-            if (project == null)
+            model.CountyProject = await context.CountyProject
+                    .Include(s => s.User)
+                    .SingleOrDefaultAsync(m => m.CountyProjectId == id);    
+
+            if (model.CountyProject == null)
             {
                 return NotFound();
             }
 
-            var projectTypeName = await context.ProjectType
-                    .SingleOrDefaultAsync(m => m.ProjectTypeId == project.ProjectTypeId);
+            model.ProjectType = await context.ProjectType
+                    .SingleOrDefaultAsync(m => m.ProjectTypeId == model.CountyProject.ProjectTypeId);
 
-            ProjectDetailViewModel model = new ProjectDetailViewModel();
-            model.CountyProject = project;
-            model.ProjectType = projectTypeName;
+            model.MaterialList =
+                (from mat in context.Material
+                join projectmaterial in context.ProjectTypeMaterial on mat.MaterialId equals projectmaterial.MaterialId
+                join projtype in context.ProjectType on projectmaterial.ProjectTypeId equals projtype.ProjectTypeId
+                join ctyproj in context.CountyProject on projtype.ProjectTypeId equals ctyproj.ProjectTypeId
+                where ctyproj.CountyProjectId == id
+                select mat).ToList();
 
             return View(model);
         }
