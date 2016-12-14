@@ -25,5 +25,6 @@ namespace ASProjectProjector.Models
     public ApplicationUser User { get; set; }
     [Required]
     public double ProjectSqFt {get;set;}
+    public double TotalProjectCost {get;set;}
   }
 }
