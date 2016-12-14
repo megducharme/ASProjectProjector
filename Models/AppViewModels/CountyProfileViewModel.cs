@@ -8,6 +8,7 @@ namespace ASProjectProjector.ViewModels
     {
         public List<CountyProject> CountyProject {get;set;}
         public ApplicationUser User {get;set;}
-        public List<TotalProjectCost> 
+        public decimal TotalProjectCost {get;set;}
+
     }
 }

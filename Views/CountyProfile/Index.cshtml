@@ -1,7 +1,9 @@
 @model ASProjectProjector.ViewModels.CountyProfileViewModel
 
-<h2>@model.User.CountyName Profile</h2>
+<h2>Profile</h2>
 
+
+<h4>@Html.DisplayFor(model => model.TotalProjectCost)</h4>
 <hr/>
 
 <h3>Budget</h3>
@@ -13,10 +15,10 @@
 <hr>
 
 <h3>Active Projects</h3>
-    @foreach (var item in Model.ProjectType)
+    @foreach (var item in Model.CountyProject)
     {
         <div class="row">
-            <div class="col-md-3">@Html.DisplayFor(modelItem => item.Name)</div>
+            <div class="col-md-3">@Html.DisplayFor(modelItem => item.CodeName)</div>
         </div>
     }
 
@@ -24,9 +26,9 @@
 <hr>
 
 <h3>Saved Projects</h3>
-    @foreach (var item in Model.ProjectType)
+    @foreach (var item in Model.CountyProject)
     {
         <div class="row">
-            <div class="col-md-3">@Html.DisplayFor(modelItem => item.Name)</div>
+            <div class="col-md-3">@Html.DisplayFor(modelItem => item.CodeName)</div>
         </div>
     }

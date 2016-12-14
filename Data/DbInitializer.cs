@@ -24,32 +24,32 @@ namespace ASProjectProjector.Data
               {
                   new Material {
                       Name = "Roof Decking Screws",
-                      CostSqFt = 3.50,
+                      CostSqFt = 3.50M,
                       CountSqFt = 15
                   },
                   new Material {
                       Name = "4x8 1/2 Drywall",
-                      CostSqFt = 12.00,
+                      CostSqFt = 12.00M,
                       CountSqFt = 1
                   },
                   new Material {
                       Name = " 1 1/2 Drywall Screws",
-                      CostSqFt = 2.00,
+                      CostSqFt = 2.00M,
                       CountSqFt = 15
                   },
                   new Material {
                       Name = "Joint Compound",
-                      CostSqFt = 0.50,
+                      CostSqFt = 0.50M,
                       CountSqFt = 0
                   },
                   new Material {
                       Name = "Drywall Tape",
-                      CostSqFt = 1.15,
+                      CostSqFt = 1.15M,
                       CountSqFt = 0
                   },
                   new Material {
                       Name = "120 grit Sandpaper",
-                      CostSqFt = 1.50,
+                      CostSqFt = 1.50M,
                       CountSqFt = 0
                   }
               };

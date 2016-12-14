@@ -105,7 +105,7 @@ namespace ASProjectProjector.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, CountyName = model.CountyName, HomesFigure = model.HomesFigure, TotalWorkCrews = model.TotalWorkCrews };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, CountyName = model.CountyName, TotalWorkCrews = model.TotalWorkCrews, HomesFigure = Convert.ToDecimal(model.HomesFigure) };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

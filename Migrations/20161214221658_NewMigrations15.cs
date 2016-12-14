@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ASProjectProjector.Migrations
 {
-    public partial class NewMigrations : Migration
+    public partial class NewMigrations15 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,7 @@ namespace ASProjectProjector.Migrations
                 {
                     AdditionalCostId = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
-                    Amount = table.Column<double>(nullable: false),
+                    Amount = table.Column<decimal>(nullable: false),
                     CountyProjectId = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: false)
                 },
@@ -33,7 +33,7 @@ namespace ASProjectProjector.Migrations
                     CountyName = table.Column<string>(nullable: false),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(nullable: false),
-                    HomesFigure = table.Column<double>(nullable: false),
+                    HomesFigure = table.Column<decimal>(nullable: false),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
@@ -42,8 +42,8 @@ namespace ASProjectProjector.Migrations
                     PhoneNumber = table.Column<string>(nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(nullable: false),
                     SecurityStamp = table.Column<string>(nullable: true),
-                    TotalBudget = table.Column<double>(nullable: true),
-                    TotalWorkCrews = table.Column<int>(nullable: false),
+                    TotalBudget = table.Column<decimal>(nullable: false),
+                    TotalWorkCrews = table.Column<decimal>(nullable: false),
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     UserName = table.Column<string>(maxLength: 256, nullable: true)
                 },
@@ -113,7 +113,7 @@ namespace ASProjectProjector.Migrations
                 {
                     RestrictedCountyId = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
-                    Amount = table.Column<double>(nullable: false),
+                    Amount = table.Column<decimal>(nullable: false),
                     GroupDonating = table.Column<string>(nullable: false),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -177,10 +177,11 @@ namespace ASProjectProjector.Migrations
                         .Annotation("Autoincrement", true),
                     Active = table.Column<bool>(nullable: false),
                     CodeName = table.Column<string>(nullable: false),
-                    EstimatedLengthInDays = table.Column<int>(nullable: false),
+                    EstimatedLengthInDays = table.Column<decimal>(nullable: false),
                     FamilyName = table.Column<string>(nullable: false),
-                    ProjectSqFt = table.Column<double>(nullable: false),
+                    ProjectSqFt = table.Column<decimal>(nullable: false),
                     ProjectTypeId = table.Column<int>(nullable: false),
+                    TotalProjectCost = table.Column<decimal>(nullable: false),
                     UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -206,8 +207,8 @@ namespace ASProjectProjector.Migrations
                 {
                     MaterialId = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
-                    CostSqFt = table.Column<double>(nullable: false),
-                    CountSqFt = table.Column<double>(nullable: false),
+                    CostSqFt = table.Column<decimal>(nullable: false),
+                    CountSqFt = table.Column<decimal>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     ProjectTypeId = table.Column<int>(nullable: true)
                 },

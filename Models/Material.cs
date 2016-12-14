@@ -14,8 +14,8 @@ namespace ASProjectProjector.Models
     public string Name {get;set;}
     [Required]
     [DisplayFormat(DataFormatString = "{0:C}")]
-    public double CostSqFt {get;set;}
+    public decimal CostSqFt {get;set;}
     [Required]
-    public double CountSqFt {get;set;}
+    public decimal CountSqFt {get;set;}
   }
 }
