@@ -111,7 +111,7 @@ namespace ASProjectProjector.Controllers
                 model.ProjectType = await context.ProjectType
                         .SingleOrDefaultAsync(m => m.ProjectTypeId == model.CountyProject.ProjectTypeId);
                 
-                //get all materials on certain proejct type
+                //get all materials for specificProject's prejct type
                 model.MaterialList =
                 (from mat in context.Material
                 join projectmaterial in context.ProjectTypeMaterial on mat.MaterialId equals projectmaterial.MaterialId
@@ -132,6 +132,8 @@ namespace ASProjectProjector.Controllers
                 (from addcosts in context.AdditionalCost 
                 join ctyprj in context.CountyProject on addcosts.CountyProjectId equals ctyprj.CountyProjectId
                 select addcosts).ToList();
+
+                model.AdditionalCosts = totalAdditionalCosts;
 
                 //add up all the addional costs
                 decimal sumAddCosts = 0;
@@ -173,6 +175,56 @@ namespace ASProjectProjector.Controllers
                 await context.SaveChangesAsync();
 
                 return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> AddAdditionalCost()
+        {
+            AdditionalCostViewModel model = new AdditionalCostViewModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveCost(AdditionalCost additionalCost)
+        {
+            ModelState.Remove("additionalCost.User");
+
+            if (ModelState.IsValid)
+            {
+                var user = await GetCurrentUserAsync();
+                additionalCost.User = user;
+
+                context.Add(additionalCost);
+
+                await context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index", "AdditionalCost");
+        }
+
+        // [HttpGet]
+        // public async Task<IActionResult> Index()
+        // {
+        //     var User = await GetCurrentUserAsync();
+        //     var currentUserId = User.Id;
+
+        //     var model = new AllAdditionalCostsViewModel();
+        //     model.AdditionalCost = await context.AdditionalCost
+        //                     .Where(l => l.User.Id == currentUserId).ToListAsync();
+
+        //     return View(model);
+        // }
+
+        [RouteAttribute("CountyProject/Delete/{id}")]
+        [HttpPost("{id}")]
+        public async Task<IActionResult> DeleteCost([FromRoute]int id)
+        {
+            var cost = await context.AdditionalCost
+                .Where(l => l.AdditionalCostId == id).SingleOrDefaultAsync();
+
+                context.Remove(cost);
+
+                await context.SaveChangesAsync();
+
+                return RedirectToAction("Index", "CountyProject");
         }
 
     }

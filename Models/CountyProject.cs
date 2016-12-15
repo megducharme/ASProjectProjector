@@ -26,5 +26,7 @@ namespace ASProjectProjector.Models
     [Required]
     public decimal ProjectSqFt {get;set;}
     public decimal TotalProjectCost {get;set;}
+
+    public ICollection<AdditionalCost> AdditionalCosts;
   }
 }

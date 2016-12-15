@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using ASProjectProjector.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -10,6 +11,8 @@ namespace ASProjectProjector.ViewModels
         public ApplicationUser User {get;set;}
         public ProjectType ProjectType {get;set;}
         public List<Material> MaterialList {get;set;}
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal TotalProjectCost {get;set;}
+        public List<AdditionalCost> AdditionalCosts {get;set;}
     }
 }

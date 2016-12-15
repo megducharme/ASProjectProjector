@@ -2,7 +2,47 @@
 
 <h2>@Html.DisplayFor(model => model.CountyProject.CodeName)</h2>
 <br>
-<h4>@Html.DisplayFor(model => model.ProjectType.Name)</h4>
+<h3>@Html.DisplayFor(model => model.ProjectType.Name)</h3>
+
+<h4>Total Project Cost</h4>
+<h4>@Html.DisplayFor(model => model.TotalProjectCost)</h4>
+<br>
+
+@foreach (var item in Model.MaterialList)
+{
+    <div class="row">
+        <div class="col-md-3">@Html.DisplayFor(modelItem => item.Name)</div>
+        <div class="col-md-3">@Html.DisplayFor(modelItem => item.CostSqFt)</div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+    </div>
+}
+
+@foreach (var item in Model.AdditionalCosts)
+{
+    <div class="row">
+        <div class="col-md-3">@Html.DisplayFor(modelItem => item.Description)</div>
+        <div class="col-md-3">@Html.DisplayFor(modelItem => item.Amount)</div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+    </div>
+}
+
+<br>
+<hr>
+@using (Html.BeginForm("Delete", "CountyProject"))
+{
+    <div class="col-md-offset-2 col-md-10 form-group">
+        <input type="submit" value="Delete" class="btn btn-default" />
+    </div>
+}
+
+<form>
+    <div class="form-group">
+        <a asp-action="AddAdditionalCost" asp-route-returnurl="/Detail/${@Model.CountyProject.CountyProjectId}" asp-controller="CountyProject" class="btn btn-default">Add Cost</a>
+    </div>
+</form>
+
 
 @if (@Model.CountyProject.Active) {
 <form asp-action="Activate">
@@ -23,27 +63,3 @@
     </div>
 </form>
 }
-
-@foreach (var item in Model.MaterialList)
-{
-    <div class="row">
-        <div class="col-md-12">@Html.DisplayFor(modelItem => item.Name)</div>
-    </div>
-}
-
-<br>
-<hr>
-@using (Html.BeginForm("Delete", "CountyProject"))
-{
-    <div class="col-md-offset-2 col-md-10 form-group">
-        <input type="submit" value="Delete" class="btn btn-default" />
-    </div>
-}
-
-<form>
-    <div class="form-group">
-        <div>
-            <a asp-action="Create" asp-controller="AdditionalCost" class="btn btn-default">Add Cost</a>
-        </div>
-    </div>
-</form>
