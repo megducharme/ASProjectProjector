@@ -12,6 +12,7 @@ namespace ASProjectProjector.Models
     public int RestrictedCountyId {get;set;}
     [Required]
     public string GroupDonating {get;set;}
+    public string ContactPerson {get;set;}
     [Required]
     [DisplayFormat(DataFormatString = "{0:C}")]
     public decimal Amount {get;set;}

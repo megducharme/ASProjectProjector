@@ -25,7 +25,6 @@ namespace ASProjectProjector.Controllers
             _userManager = userManager;
             context = ctx;
         }
-
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         [Authorize]
@@ -36,25 +35,33 @@ namespace ASProjectProjector.Controllers
 
             CountyProfileViewModel model = new CountyProfileViewModel();
 
+            //retrieve the staff's projects
             model.CountyProject = await context.CountyProject
-                .Where(m => m.User.Id == currentUserId)
+                .Where(m => m.User.Id == currentUserId && m.Active == true)
                 .ToListAsync();
 
-            decimal sum = 0;
+            //add up total project cost
+            decimal allProjectCostSum = 0;
             foreach (var project in model.CountyProject)
             {
-                sum += project.TotalProjectCost;
+                allProjectCostSum += project.TotalProjectCost;
             }
-            model.TotalProjectCost = sum;            
+            model.TotalProjectCost = allProjectCostSum;
 
+            //display active and inactive projects
+            model.CountyProjectActive = await context.CountyProject
+                            .Where(l => l.Active == true && l.User.Id == currentUserId)
+                            .OrderBy(l => l.CodeName).ToListAsync();
+
+            model.CountyProjectInactive = await context.CountyProject
+                            .Where(l => l.Active == false && l.User.Id == currentUserId)
+                            .OrderBy(l => l.CodeName).ToListAsync();            
+
+            //display total workcrews
+            // model.TotalWorkCrews = await context.User.TotalWorkCrews
+            
             return View(model);
-
         }
-
-        // public async Task<IActionResult> EditWorkCrews()
-        // {
-
-        // }
             
     }
 }

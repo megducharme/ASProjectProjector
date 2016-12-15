@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ASProjectProjector.Migrations
 {
-    public partial class NewMigrations15 : Migration
+    public partial class NewMigrationsRC : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -114,6 +114,7 @@ namespace ASProjectProjector.Migrations
                     RestrictedCountyId = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
                     Amount = table.Column<decimal>(nullable: false),
+                    ContactPerson = table.Column<string>(nullable: true),
                     GroupDonating = table.Column<string>(nullable: false),
                     UserId = table.Column<string>(nullable: false)
                 },

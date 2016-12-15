@@ -29,13 +29,16 @@ namespace ASProjectProjector.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            var User = await GetCurrentUserAsync();
+            var currentUserId = User.Id;
+
             var model = new AllProjectsViewModel();
             model.CountyProjectActive = await context.CountyProject
-                            .Where(l => l.Active == true)
+                            .Where(l => l.Active == true && l.User.Id == currentUserId)
                             .OrderBy(l => l.CodeName).ToListAsync();
 
             model.CountyProjectInactive = await context.CountyProject
-                            .Where(l => l.Active == false)
+                            .Where(l => l.Active == false && l.User.Id == currentUserId)
                             .OrderBy(l => l.CodeName).ToListAsync();
 
             return View(model);
@@ -62,6 +65,26 @@ namespace ASProjectProjector.Controllers
 
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Save(CountyProject countyProject)
+        {
+            
+            ModelState.Remove("countyProject.User");
+
+            if (ModelState.IsValid)
+            {
+                var user = await GetCurrentUserAsync();
+                countyProject.User = user;
+
+                context.Add(countyProject);
+
+                await context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index");
+        }
+
+        
         [HttpGet]
         [RouteAttribute("/Detail/{id}")]
         public async Task<IActionResult> Detail([FromRoute]int? id)
@@ -109,7 +132,7 @@ namespace ASProjectProjector.Controllers
 
                 await context.SaveChangesAsync();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "CountyProfile");
         }
 
         [RouteAttribute("CountyProject/Delete/{id}")]
@@ -126,22 +149,5 @@ namespace ASProjectProjector.Controllers
                 return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Save(CountyProject countyProject)
-        {
-            
-            ModelState.Remove("countyProject.User");
-
-            if (ModelState.IsValid)
-            {
-                var user = await GetCurrentUserAsync();
-                countyProject.User = user;
-
-                context.Add(countyProject);
-
-                await context.SaveChangesAsync();
-            }
-            return RedirectToAction("Index");
-        }
     }
 }

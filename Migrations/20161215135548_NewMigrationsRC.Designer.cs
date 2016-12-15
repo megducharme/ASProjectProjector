@@ -8,8 +8,8 @@ using ASProjectProjector.Data;
 namespace ASProjectProjector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161214221658_NewMigrations15")]
-    partial class NewMigrations15
+    [Migration("20161215135548_NewMigrationsRC")]
+    partial class NewMigrationsRC
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -179,6 +179,8 @@ namespace ASProjectProjector.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<decimal>("Amount");
+
+                    b.Property<string>("ContactPerson");
 
                     b.Property<string>("GroupDonating")
                         .IsRequired();

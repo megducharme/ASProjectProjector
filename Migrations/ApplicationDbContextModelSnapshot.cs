@@ -179,6 +179,8 @@ namespace ASProjectProjector.Migrations
 
                     b.Property<decimal>("Amount");
 
+                    b.Property<string>("ContactPerson");
+
                     b.Property<string>("GroupDonating")
                         .IsRequired();
 
