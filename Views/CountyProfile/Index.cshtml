@@ -5,11 +5,10 @@
 <hr/>
 
 <h3>Budget</h3>
-    <h4>Total Budget:</h4>
-    <h4>Remaining Budget:</h4>
+    <h4>Total Budget: $@Html.DisplayFor(model => model.TotalBudget)</h4>
+    <h4>Remaining Budget: $@Html.DisplayFor(model => model.RemainingBudget)</h4> 
     <h4>Projected Budget:</h4>
-    <h4>Total Project Cost: : $@Html.DisplayFor(model => model.TotalProjectCost)</h4>
-    <a asp-action="AddDonation" asp-controller="RestrictedCounty">Add Restricted County Donation</a>
+    <h4>Total Project Cost: $@Html.DisplayFor(model => model.TotalProjectCost)</h4>
 
 <br>
 <hr>

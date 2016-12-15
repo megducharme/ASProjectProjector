@@ -14,11 +14,11 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ASProjectProjector.Controllers
 {
-    public class RestrictedCountyController : Controller
+    public class AdditionalCostController : Controller
     {
         private ApplicationDbContext context;
         private readonly UserManager<ApplicationUser> _userManager;
-        public RestrictedCountyController(UserManager<ApplicationUser> userManager, ApplicationDbContext ctx)
+        public AdditionalCostController(UserManager<ApplicationUser> userManager, ApplicationDbContext ctx)
         {
             _userManager = userManager;
             context = ctx;
@@ -27,27 +27,27 @@ namespace ASProjectProjector.Controllers
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> AddAdditionalCost()
         {
-            RestrictedCountyViewModel model = new RestrictedCountyViewModel();
+            AdditionalCostViewModel model = new AdditionalCostViewModel();
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddDonation(RestrictedCounty restrictedCounty)
+        public async Task<IActionResult> AddDonation(AdditionalCost additionalCost)
         {
-            ModelState.Remove("restrictedCounty.User");
+            ModelState.Remove("additionalCost.User");
 
             if (ModelState.IsValid)
             {
                 var user = await GetCurrentUserAsync();
-                restrictedCounty.User = user;
+                additionalCost.User = user;
 
-                context.Add(restrictedCounty);
+                context.Add(additionalCost);
 
                 await context.SaveChangesAsync();
             }
-            return RedirectToAction("Index", "RestrictedCounty");
+            return RedirectToAction("Index", "AdditionalCost");
         }
 
         [HttpGet]
@@ -66,7 +66,7 @@ namespace ASProjectProjector.Controllers
 
         [RouteAttribute("RestrictedCounty/Delete/{id}")]
         [HttpPost("{id}")]
-        public async Task<IActionResult> DeleteDonation ([FromRoute]int id)
+        public async Task<IActionResult> DeleteCost([FromRoute]int id)
         {
             var donation = await context.RestrictedCounty
                 .Where(l => l.RestrictedCountyId == id).SingleOrDefaultAsync();

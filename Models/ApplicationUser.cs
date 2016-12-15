@@ -16,7 +16,7 @@ namespace ASProjectProjector.Models
         [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal HomesFigure {get;set;}
         [Required]
-        public decimal? TotalWorkCrews {get;set;}
+        public decimal TotalWorkCrews {get;set;}
         [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal TotalBudget {get;set;}
     }

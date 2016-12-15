@@ -1,0 +1,40 @@
+@model ASProjectProjector.ViewModels.RestrictedCountyViewModel
+
+<h2>Restricted County Donation</h2>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <hr />
+
+        <div class="form-group">
+            <label asp-for="@Model.RestrictedCounty.GroupDonating" class="col-md-2 control-label">Group Name</label>
+            <div class="col-md-10">
+                <input asp-for="@Model.RestrictedCounty.GroupDonating" class="form-control" />
+                <span asp-validation-for="@Model.RestrictedCounty.GroupDonating" class="text-danger" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.RestrictedCounty.ContactPerson" class="col-md-2 control-label">Contact Person</label>
+            <div class="col-md-10">
+                <input asp-for="@Model.RestrictedCounty.ContactPerson" class="form-control" />
+                <span asp-validation-for="@Model.RestrictedCounty.ContactPerson" class="text-danger" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.RestrictedCounty.Amount" class="col-md-2 control-label">Amount</label>
+            <div class="col-md-10">
+                <input asp-for="@Model.RestrictedCounty.Amount" class="form-control" />
+                <span asp-validation-for="@Model.RestrictedCounty.Amount" class="text-danger" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+</form>

@@ -16,5 +16,6 @@ namespace ASProjectProjector.Models
     public decimal Amount {get;set;}
     [Required]
     public int CountyProjectId {get;set;}
+    public ApplicationUser User { get; set; }
   }
 }

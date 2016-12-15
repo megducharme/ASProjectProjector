@@ -1,0 +1,27 @@
+@model ASProjectProjector.ViewModels.AllAdditionalCostsViewModel
+
+<h2>All Donations</h2>
+
+<hr/>
+<div class="row">
+    <div class ="col-md-3"><h5>Description</h5></div>
+    <div class ="col-md-3 "><h5>Amount</h5></div>
+
+</div>
+
+@foreach (var item in Model.AdditionalCost)
+{
+    <div class="row">
+        <div class="col-md-3">@Html.DisplayFor(modelItem => item.Description)</div>
+        <div class="col-md-3">@Html.DisplayFor(modelItem => item.Amount)</div>
+        <div class="col-md-3 "><a asp-action="Delete" asp-controller="RestrictedCounty" asp-route-id="@item.RestrictedCountyId" asp-method="delete">Delete</a></div>
+    </div>
+}
+
+<form>
+    <div class="form-group">
+        <div>
+            <a asp-action="Create" asp-controller="AdditionalCost" class="btn btn-default">Add Additional Cost</a>
+        </div>
+    </div>
+</form>

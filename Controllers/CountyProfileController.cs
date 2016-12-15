@@ -50,16 +50,32 @@ namespace ASProjectProjector.Controllers
 
             //display active and inactive projects
             model.CountyProjectActive = await context.CountyProject
-                            .Where(l => l.Active == true && l.User.Id == currentUserId)
-                            .OrderBy(l => l.CodeName).ToListAsync();
+                .Where(l => l.Active == true && l.User.Id == currentUserId)
+                .OrderBy(l => l.CodeName).ToListAsync();
 
             model.CountyProjectInactive = await context.CountyProject
-                            .Where(l => l.Active == false && l.User.Id == currentUserId)
-                            .OrderBy(l => l.CodeName).ToListAsync();            
+                .Where(l => l.Active == false && l.User.Id == currentUserId)
+                .OrderBy(l => l.CodeName).ToListAsync();            
 
-            //display total workcrews
-            // model.TotalWorkCrews = await context.User.TotalWorkCrews
-            
+            //total budget
+            var rcDonations = await context.RestrictedCounty
+                .Where(l => l.User.Id == currentUserId).ToListAsync();
+
+            decimal totalDonations = 0;
+            foreach(var donation in rcDonations)
+            {
+                totalDonations += donation.Amount;
+            }
+
+            model.TotalBudget = (User.TotalWorkCrews * User.HomesFigure) + totalDonations;
+
+            //reamining budget
+            model.RemainingBudget = model.TotalBudget - model.TotalProjectCost;
+
+            //projected budget
+
+
+
             return View(model);
         }
             

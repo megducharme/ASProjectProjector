@@ -3,8 +3,8 @@ using ASProjectProjector.Models;
 
 namespace ASProjectProjector.ViewModels
 {
-    public class RestrictedCountyViewModel
+    public class AdditionalCostViewModel
     {
-        public RestrictedCounty RestrictedCounty {get;set;}
+        public AdditionalCost AdditionalCost {get;set;}
     }
 }
