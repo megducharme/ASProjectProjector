@@ -16,7 +16,7 @@ namespace ASProjectProjector.Models
     [Required]
     public string CodeName {get;set;}
     [Required]
-    public int EstimatedLengthInDays {get;set;}
+    public decimal EstimatedLengthInDays {get;set;}
     [Required]
     public string FamilyName {get;set;}
     [Required]
@@ -24,7 +24,7 @@ namespace ASProjectProjector.Models
     [Required]
     public ApplicationUser User { get; set; }
     [Required]
-    public double ProjectSqFt {get;set;}
-    public double TotalProjectCost {get;set;}
+    public decimal ProjectSqFt {get;set;}
+    public decimal TotalProjectCost {get;set;}
   }
 }

@@ -13,8 +13,9 @@ namespace ASProjectProjector.Models
     public string Description {get;set;}
     [Required]
     [DisplayFormat(DataFormatString = "{0:C}")]
-    public double Amount {get;set;}
+    public decimal Amount {get;set;}
     [Required]
     public int CountyProjectId {get;set;}
+    public ApplicationUser User { get; set; }
   }
 }

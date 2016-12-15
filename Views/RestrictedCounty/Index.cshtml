@@ -1,0 +1,30 @@
+@model ASProjectProjector.ViewModels.AllDonationsViewModel
+
+<h2>All Donations</h2>
+
+<hr/>
+<div class="row">
+    <div class ="col-md-3"><h5>Group Name</h5></div>
+    <div class ="col-md-3 "><h5>Contact Person</h5></div>
+    <div class ="col-md-3 "><h5>Amount</h5></div>
+    <div class ="col-md-3 "></div>
+
+</div>
+
+@foreach (var item in Model.RestrictedCounty)
+{
+    <div class="row">
+        <div class="col-md-3">@Html.DisplayFor(modelItem => item.GroupDonating)</div>
+        <div class="col-md-3">@Html.DisplayFor(modelItem => item.ContactPerson)</div>
+        <div class="col-md-3 ">@Html.DisplayFor(modelItem => item.Amount)</div>
+        <div class="col-md-3 "><a asp-action="Delete" asp-controller="RestrictedCounty" asp-route-id="@item.RestrictedCountyId" asp-method="delete">Delete</a></div>
+    </div>
+}
+
+<form>
+    <div class="form-group">
+        <div>
+            <a asp-action="AddDonation" asp-controller="RestrictedCounty" class="btn btn-default">Add Donation</a>
+        </div>
+    </div>
+</form>

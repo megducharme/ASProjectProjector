@@ -14,11 +14,11 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ASProjectProjector.Controllers
 {
-    public class RestrictedCountyController : Controller
+    public class AdditionalCostController : Controller
     {
         private ApplicationDbContext context;
         private readonly UserManager<ApplicationUser> _userManager;
-        public RestrictedCountyController(UserManager<ApplicationUser> userManager, ApplicationDbContext ctx)
+        public AdditionalCostController(UserManager<ApplicationUser> userManager, ApplicationDbContext ctx)
         {
             _userManager = userManager;
             context = ctx;
@@ -29,25 +29,25 @@ namespace ASProjectProjector.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            RestrictedCountyViewModel model = new RestrictedCountyViewModel();
+            AdditionalCostViewModel model = new AdditionalCostViewModel();
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddDonation(RestrictedCounty restrictedCounty)
+        public async Task<IActionResult> AddCost(AdditionalCost additionalCost)
         {
-            ModelState.Remove("restrictedCounty.User");
+            ModelState.Remove("additionalCost.User");
 
             if (ModelState.IsValid)
             {
                 var user = await GetCurrentUserAsync();
-                restrictedCounty.User = user;
+                additionalCost.User = user;
 
-                context.Add(restrictedCounty);
+                context.Add(additionalCost);
 
                 await context.SaveChangesAsync();
             }
-            return RedirectToAction("Index", "RestrictedCounty");
+            return RedirectToAction("Index", "AdditionalCost");
         }
 
         [HttpGet]
@@ -56,26 +56,25 @@ namespace ASProjectProjector.Controllers
             var User = await GetCurrentUserAsync();
             var currentUserId = User.Id;
 
-            var model = new AllDonationsViewModel();
-            model.RestrictedCounty = await context.RestrictedCounty
-                            .Where(l => l.User.Id == currentUserId)
-                            .OrderBy(l => l.ContactPerson).ToListAsync();
+            var model = new AllAdditionalCostsViewModel();
+            model.AdditionalCost = await context.AdditionalCost
+                            .Where(l => l.User.Id == currentUserId).ToListAsync();
 
             return View(model);
         }
 
-        [RouteAttribute("RestrictedCounty/Delete/{id}")]
+        [RouteAttribute("AdditionalCost/Delete/{id}")]
         [HttpPost("{id}")]
-        public async Task<IActionResult> DeleteDonation ([FromRoute]int id)
+        public async Task<IActionResult> DeleteCost([FromRoute]int id)
         {
-            var donation = await context.RestrictedCounty
-                .Where(l => l.RestrictedCountyId == id).SingleOrDefaultAsync();
+            var cost = await context.AdditionalCost
+                .Where(l => l.AdditionalCostId == id).SingleOrDefaultAsync();
 
-                context.Remove(donation);
+                context.Remove(cost);
 
                 await context.SaveChangesAsync();
 
-                return RedirectToAction("Index", "RestrictedCounty");
+                return RedirectToAction("Index", "AdditionalCost");
         }
     }
 }

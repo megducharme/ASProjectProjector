@@ -1,0 +1,32 @@
+@model ASProjectProjector.ViewModels.AdditionalCostViewModel
+
+<h2>Additional Project Costs</h2>
+
+<form asp-action="AddCost">
+    <div class="form-horizontal">
+        <hr />
+
+        <div class="form-group">
+            <label asp-for="@Model.AdditionalCost.Description" class="col-md-2 control-label">Description</label>
+            <div class="col-md-10">
+                <input asp-for="@Model.AdditionalCost.Description" class="form-control" />
+                <span asp-validation-for="@Model.AdditionalCost.Description" class="text-danger" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.AdditionalCost.Amount" class="col-md-2 control-label">Amount</label>
+            <div class="col-md-10">
+                <input asp-for="@Model.AdditionalCost.Amount" class="form-control" />
+                <span asp-validation-for="@Model.AdditionalCost.Amount" class="text-danger" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+</form>

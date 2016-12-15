@@ -20,14 +20,18 @@ namespace ASProjectProjector.Migrations
                     b.Property<int>("AdditionalCostId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<double>("Amount");
+                    b.Property<decimal>("Amount");
 
                     b.Property<int>("CountyProjectId");
 
                     b.Property<string>("Description")
                         .IsRequired();
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("AdditionalCostId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("AdditionalCost");
                 });
@@ -49,7 +53,7 @@ namespace ASProjectProjector.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<double>("HomesFigure");
+                    b.Property<decimal>("HomesFigure");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -69,10 +73,9 @@ namespace ASProjectProjector.Migrations
 
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<double?>("TotalBudget");
+                    b.Property<decimal>("TotalBudget");
 
-                    b.Property<int?>("TotalWorkCrews")
-                        .IsRequired();
+                    b.Property<decimal>("TotalWorkCrews");
 
                     b.Property<bool>("TwoFactorEnabled");
 
@@ -101,14 +104,16 @@ namespace ASProjectProjector.Migrations
                     b.Property<string>("CodeName")
                         .IsRequired();
 
-                    b.Property<int>("EstimatedLengthInDays");
+                    b.Property<decimal>("EstimatedLengthInDays");
 
                     b.Property<string>("FamilyName")
                         .IsRequired();
 
-                    b.Property<double>("ProjectSqFt");
+                    b.Property<decimal>("ProjectSqFt");
 
                     b.Property<int>("ProjectTypeId");
+
+                    b.Property<decimal>("TotalProjectCost");
 
                     b.Property<string>("UserId")
                         .IsRequired();
@@ -127,9 +132,9 @@ namespace ASProjectProjector.Migrations
                     b.Property<int>("MaterialId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<double>("CostSqFt");
+                    b.Property<decimal>("CostSqFt");
 
-                    b.Property<double>("CountSqFt");
+                    b.Property<decimal>("CountSqFt");
 
                     b.Property<string>("Name")
                         .IsRequired();
@@ -175,7 +180,9 @@ namespace ASProjectProjector.Migrations
                     b.Property<int>("RestrictedCountyId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<double>("Amount");
+                    b.Property<decimal>("Amount");
+
+                    b.Property<string>("ContactPerson");
 
                     b.Property<string>("GroupDonating")
                         .IsRequired();
@@ -295,6 +302,13 @@ namespace ASProjectProjector.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("ASProjectProjector.Models.AdditionalCost", b =>
+                {
+                    b.HasOne("ASProjectProjector.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("ASProjectProjector.Models.CountyProject", b =>

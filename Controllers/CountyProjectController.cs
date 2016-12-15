@@ -29,13 +29,16 @@ namespace ASProjectProjector.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            var User = await GetCurrentUserAsync();
+            var currentUserId = User.Id;
+
             var model = new AllProjectsViewModel();
             model.CountyProjectActive = await context.CountyProject
-                            .Where(l => l.Active == true)
+                            .Where(l => l.Active == true && l.User.Id == currentUserId)
                             .OrderBy(l => l.CodeName).ToListAsync();
 
             model.CountyProjectInactive = await context.CountyProject
-                            .Where(l => l.Active == false)
+                            .Where(l => l.Active == false && l.User.Id == currentUserId)
                             .OrderBy(l => l.CodeName).ToListAsync();
 
             return View(model);
@@ -62,69 +65,6 @@ namespace ASProjectProjector.Controllers
 
             return View(model);
         }
-        [HttpGet]
-        [RouteAttribute("/Detail/{id}")]
-        public async Task<IActionResult> Detail([FromRoute]int? id)
-        {
-            // If no id was in the route, return 404
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            ProjectDetailViewModel model = new ProjectDetailViewModel();
-
-            model.CountyProject = await context.CountyProject
-                    .Include(s => s.User)
-                    .SingleOrDefaultAsync(m => m.CountyProjectId == id);    
-
-            if (model.CountyProject == null)
-            {
-                return NotFound();
-            }
-
-            model.ProjectType = await context.ProjectType
-                    .SingleOrDefaultAsync(m => m.ProjectTypeId == model.CountyProject.ProjectTypeId);
-
-            model.MaterialList =
-                (from mat in context.Material
-                join projectmaterial in context.ProjectTypeMaterial on mat.MaterialId equals projectmaterial.MaterialId
-                join projtype in context.ProjectType on projectmaterial.ProjectTypeId equals projtype.ProjectTypeId
-                join ctyproj in context.CountyProject on projtype.ProjectTypeId equals ctyproj.ProjectTypeId
-                where ctyproj.CountyProjectId == id
-                select mat).ToList();
-
-            return View(model);
-        }
-
-        [RouteAttribute("CountyProject/Activate/{id}")]
-        [HttpPost("{id}")]
-        public async Task<IActionResult> Activate([FromRoute]int? id)
-        {
-            var project = await context.CountyProject
-                .Where(l => l.CountyProjectId == id).SingleOrDefaultAsync();
-                project.Active = !project.Active;
-
-                context.Update(project);
-
-                await context.SaveChangesAsync();
-
-                return RedirectToAction("Index");
-        }
-
-        [RouteAttribute("CountyProject/Delete/{id}")]
-        [HttpPost("{id}")]
-        public async Task<IActionResult> Delete([FromRoute]int? id)
-        {
-            var project = await context.CountyProject
-                .Where(l => l.CountyProjectId == id).SingleOrDefaultAsync();
-
-                context.Remove(project);
-
-                await context.SaveChangesAsync();
-
-                return RedirectToAction("Index");
-        }
 
         [HttpPost]
         public async Task<IActionResult> Save(CountyProject countyProject)
@@ -143,5 +83,73 @@ namespace ASProjectProjector.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        
+        [HttpGet]
+        [RouteAttribute("/Detail/{id}")]
+        public async Task<IActionResult> Detail([FromRoute]int? id)
+        {
+            // If no id was in the route, return 404
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            ProjectDetailViewModel model = new ProjectDetailViewModel();
+
+            model.CountyProject = await context.CountyProject
+                    // .Include(s => s.User)
+                    .SingleOrDefaultAsync(m => m.CountyProjectId == id);    
+
+            if (model.CountyProject == null)
+            {
+                return NotFound();
+            }
+
+            model.ProjectType = await context.ProjectType
+                    .SingleOrDefaultAsync(m => m.ProjectTypeId == model.CountyProject.ProjectTypeId);
+
+                var allmaterials =
+                (from mat in context.Material
+                join projectmaterial in context.ProjectTypeMaterial on mat.MaterialId equals projectmaterial.MaterialId
+                join projtype in context.ProjectType on projectmaterial.ProjectTypeId equals projtype.ProjectTypeId
+                join ctyproj in context.CountyProject on projtype.ProjectTypeId equals ctyproj.ProjectTypeId
+                where ctyproj.CountyProjectId == id
+                select mat).ToList();
+
+               model.MaterialList = allmaterials;
+
+            return View(model);
+        }
+
+        [RouteAttribute("CountyProject/Activate/{id}")]
+        [HttpPost("{id}")]
+        public async Task<IActionResult> Activate([FromRoute]int? id)
+        {
+            var project = await context.CountyProject
+                .Where(l => l.CountyProjectId == id).SingleOrDefaultAsync();
+                project.Active = !project.Active;
+
+                context.Update(project);
+
+                await context.SaveChangesAsync();
+
+                return RedirectToAction("Index", "CountyProfile");
+        }
+
+        [RouteAttribute("CountyProject/Delete/{id}")]
+        [HttpPost("{id}")]
+        public async Task<IActionResult> Delete([FromRoute]int? id)
+        {
+            var project = await context.CountyProject
+                .Where(l => l.CountyProjectId == id).SingleOrDefaultAsync();
+
+                context.Remove(project);
+
+                await context.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+        }
+
     }
 }

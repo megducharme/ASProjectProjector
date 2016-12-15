@@ -14,10 +14,10 @@ namespace ASProjectProjector.Models
         public string CountyName {get;set;}
         [Required]
         [DisplayFormat(DataFormatString = "{0:C}")]
-        public double HomesFigure {get;set;}
+        public decimal HomesFigure {get;set;}
         [Required]
-        public int? TotalWorkCrews {get;set;}
+        public decimal TotalWorkCrews {get;set;}
         [DisplayFormat(DataFormatString = "{0:C}")]
-        public double? TotalBudget {get;set;}
+        public decimal TotalBudget {get;set;}
     }
 }
