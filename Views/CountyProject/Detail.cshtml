@@ -1,15 +1,10 @@
 @model ASProjectProjector.ViewModels.ProjectDetailViewModel
 
-@{
-    ViewData["Title"] = "Project Details";
-}
-
-<br/>
 <h2>@Html.DisplayFor(model => model.CountyProject.CodeName)</h2>
+<br>
 <h4>@Html.DisplayFor(model => model.ProjectType.Name)</h4>
 
 @if (@Model.CountyProject.Active) {
-    
 <form asp-action="Activate">
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
@@ -27,7 +22,6 @@
         </div>
     </div>
 </form>
-
 }
 
 @foreach (var item in Model.MaterialList)
@@ -44,7 +38,6 @@
     <div class="col-md-offset-2 col-md-10 form-group">
         <input type="submit" value="Delete" class="btn btn-default" />
     </div>
-
 }
 
 <form>

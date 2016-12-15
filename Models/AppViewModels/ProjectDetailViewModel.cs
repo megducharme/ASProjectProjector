@@ -10,5 +10,6 @@ namespace ASProjectProjector.ViewModels
         public ApplicationUser User {get;set;}
         public ProjectType ProjectType {get;set;}
         public List<Material> MaterialList {get;set;}
+        public decimal TotalProjectCost {get;set;}
     }
 }

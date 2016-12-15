@@ -98,18 +98,21 @@ namespace ASProjectProjector.Controllers
             ProjectDetailViewModel model = new ProjectDetailViewModel();
 
             model.CountyProject = await context.CountyProject
-                    // .Include(s => s.User)
-                    .SingleOrDefaultAsync(m => m.CountyProjectId == id);    
+                    .SingleOrDefaultAsync(m => m.CountyProjectId == id);  
+
+            var specificProject = model.CountyProject;  
 
             if (model.CountyProject == null)
             {
                 return NotFound();
             }
 
-            model.ProjectType = await context.ProjectType
-                    .SingleOrDefaultAsync(m => m.ProjectTypeId == model.CountyProject.ProjectTypeId);
-
-                var allmaterials =
+                //get specificProject
+                model.ProjectType = await context.ProjectType
+                        .SingleOrDefaultAsync(m => m.ProjectTypeId == model.CountyProject.ProjectTypeId);
+                
+                //get all materials on certain proejct type
+                model.MaterialList =
                 (from mat in context.Material
                 join projectmaterial in context.ProjectTypeMaterial on mat.MaterialId equals projectmaterial.MaterialId
                 join projtype in context.ProjectType on projectmaterial.ProjectTypeId equals projtype.ProjectTypeId
@@ -117,7 +120,28 @@ namespace ASProjectProjector.Controllers
                 where ctyproj.CountyProjectId == id
                 select mat).ToList();
 
-               model.MaterialList = allmaterials;
+                //determine the total material cost based on the sqft the user input and the cost/sqft for each material
+                decimal totalMaterialCost = 0;
+                foreach(var material in model.MaterialList)
+                {
+                    totalMaterialCost += (material.CostSqFt * specificProject.ProjectSqFt);
+                }
+
+                //query the additional costs for that particular proejct
+                var totalAdditionalCosts = 
+                (from addcosts in context.AdditionalCost 
+                join ctyprj in context.CountyProject on addcosts.CountyProjectId equals ctyprj.CountyProjectId
+                select addcosts).ToList();
+
+                //add up all the addional costs
+                decimal sumAddCosts = 0;
+                foreach(var cost in totalAdditionalCosts)
+                {
+                    sumAddCosts += cost.Amount;
+                }
+
+                //calculate the total project cost based on materials and additional costs
+                model.TotalProjectCost = totalMaterialCost + sumAddCosts;
 
             return View(model);
         }
