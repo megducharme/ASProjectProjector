@@ -27,7 +27,11 @@ namespace ASProjectProjector.Migrations
                     b.Property<string>("Description")
                         .IsRequired();
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("AdditionalCostId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("AdditionalCost");
                 });
@@ -71,8 +75,7 @@ namespace ASProjectProjector.Migrations
 
                     b.Property<decimal>("TotalBudget");
 
-                    b.Property<decimal?>("TotalWorkCrews")
-                        .IsRequired();
+                    b.Property<decimal>("TotalWorkCrews");
 
                     b.Property<bool>("TwoFactorEnabled");
 
@@ -299,6 +302,13 @@ namespace ASProjectProjector.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("ASProjectProjector.Models.AdditionalCost", b =>
+                {
+                    b.HasOne("ASProjectProjector.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("ASProjectProjector.Models.CountyProject", b =>

@@ -2,31 +2,23 @@
 
 <h2>Additional Project Costs</h2>
 
-<form asp-action="AddDonation">
+<form asp-action="AddCost">
     <div class="form-horizontal">
         <hr />
 
         <div class="form-group">
-            <label asp-for="@Model.RestrictedCounty.GroupDonating" class="col-md-2 control-label">Group Name</label>
+            <label asp-for="@Model.AdditionalCost.Description" class="col-md-2 control-label">Description</label>
             <div class="col-md-10">
-                <input asp-for="@Model.RestrictedCounty.GroupDonating" class="form-control" />
-                <span asp-validation-for="@Model.RestrictedCounty.GroupDonating" class="text-danger" />
+                <input asp-for="@Model.AdditionalCost.Description" class="form-control" />
+                <span asp-validation-for="@Model.AdditionalCost.Description" class="text-danger" />
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="@Model.RestrictedCounty.ContactPerson" class="col-md-2 control-label">Contact Person</label>
+            <label asp-for="@Model.AdditionalCost.Amount" class="col-md-2 control-label">Amount</label>
             <div class="col-md-10">
-                <input asp-for="@Model.RestrictedCounty.ContactPerson" class="form-control" />
-                <span asp-validation-for="@Model.RestrictedCounty.ContactPerson" class="text-danger" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="@Model.RestrictedCounty.Amount" class="col-md-2 control-label">Amount</label>
-            <div class="col-md-10">
-                <input asp-for="@Model.RestrictedCounty.Amount" class="form-control" />
-                <span asp-validation-for="@Model.RestrictedCounty.Amount" class="text-danger" />
+                <input asp-for="@Model.AdditionalCost.Amount" class="form-control" />
+                <span asp-validation-for="@Model.AdditionalCost.Amount" class="text-danger" />
             </div>
         </div>
 

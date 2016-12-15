@@ -98,7 +98,7 @@ namespace ASProjectProjector.Controllers
             ProjectDetailViewModel model = new ProjectDetailViewModel();
 
             model.CountyProject = await context.CountyProject
-                    .Include(s => s.User)
+                    // .Include(s => s.User)
                     .SingleOrDefaultAsync(m => m.CountyProjectId == id);    
 
             if (model.CountyProject == null)
@@ -109,13 +109,15 @@ namespace ASProjectProjector.Controllers
             model.ProjectType = await context.ProjectType
                     .SingleOrDefaultAsync(m => m.ProjectTypeId == model.CountyProject.ProjectTypeId);
 
-            model.MaterialList =
+                var allmaterials =
                 (from mat in context.Material
                 join projectmaterial in context.ProjectTypeMaterial on mat.MaterialId equals projectmaterial.MaterialId
                 join projtype in context.ProjectType on projectmaterial.ProjectTypeId equals projtype.ProjectTypeId
                 join ctyproj in context.CountyProject on projtype.ProjectTypeId equals ctyproj.ProjectTypeId
                 where ctyproj.CountyProjectId == id
                 select mat).ToList();
+
+               model.MaterialList = allmaterials;
 
             return View(model);
         }

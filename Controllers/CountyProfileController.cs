@@ -73,7 +73,7 @@ namespace ASProjectProjector.Controllers
             model.RemainingBudget = model.TotalBudget - model.TotalProjectCost;
 
             //projected budget
-
+            
 
 
             return View(model);

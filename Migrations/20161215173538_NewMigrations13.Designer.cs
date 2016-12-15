@@ -8,8 +8,8 @@ using ASProjectProjector.Data;
 namespace ASProjectProjector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161215135548_NewMigrationsRC")]
-    partial class NewMigrationsRC
+    [Migration("20161215173538_NewMigrations13")]
+    partial class NewMigrations13
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,7 +28,11 @@ namespace ASProjectProjector.Migrations
                     b.Property<string>("Description")
                         .IsRequired();
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("AdditionalCostId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("AdditionalCost");
                 });
@@ -72,8 +76,7 @@ namespace ASProjectProjector.Migrations
 
                     b.Property<decimal>("TotalBudget");
 
-                    b.Property<decimal?>("TotalWorkCrews")
-                        .IsRequired();
+                    b.Property<decimal>("TotalWorkCrews");
 
                     b.Property<bool>("TwoFactorEnabled");
 
@@ -300,6 +303,13 @@ namespace ASProjectProjector.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("ASProjectProjector.Models.AdditionalCost", b =>
+                {
+                    b.HasOne("ASProjectProjector.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("ASProjectProjector.Models.CountyProject", b =>

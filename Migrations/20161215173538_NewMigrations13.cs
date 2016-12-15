@@ -4,25 +4,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ASProjectProjector.Migrations
 {
-    public partial class NewMigrationsRC : Migration
+    public partial class NewMigrations13 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "AdditionalCost",
-                columns: table => new
-                {
-                    AdditionalCostId = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
-                    Amount = table.Column<decimal>(nullable: false),
-                    CountyProjectId = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AdditionalCost", x => x.AdditionalCostId);
-                });
-
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
@@ -105,6 +90,28 @@ namespace ASProjectProjector.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AdditionalCost",
+                columns: table => new
+                {
+                    AdditionalCostId = table.Column<int>(nullable: false)
+                        .Annotation("Autoincrement", true),
+                    Amount = table.Column<decimal>(nullable: false),
+                    CountyProjectId = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AdditionalCost", x => x.AdditionalCostId);
+                    table.ForeignKey(
+                        name: "FK_AdditionalCost_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -268,6 +275,11 @@ namespace ASProjectProjector.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AdditionalCost_UserId",
+                table: "AdditionalCost",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",

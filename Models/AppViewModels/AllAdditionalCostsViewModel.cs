@@ -3,7 +3,7 @@ using ASProjectProjector.Models;
 
 namespace ASProjectProjector.ViewModels
 {
-    public class AllAdditionalCostViewModel
+    public class AllAdditionalCostsViewModel
     {
         public List<AdditionalCost> AdditionalCost {get;set;}
     }
