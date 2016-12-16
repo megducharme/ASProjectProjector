@@ -27,6 +27,19 @@ namespace ASProjectProjector.Controllers
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var User = await GetCurrentUserAsync();
+            var currentUserId = User.Id;
+
+            var model = new AllAdditionalCostsViewModel();
+            model.AdditionalCost = await context.AdditionalCost
+                            .Where(l => l.User.Id == currentUserId).ToListAsync();
+
+            return View(model);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Create()
         {
             AdditionalCostViewModel model = new AdditionalCostViewModel();
@@ -41,7 +54,7 @@ namespace ASProjectProjector.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCost(AdditionalCost additionalCost)
+        public async Task<IActionResult> SaveCost(AdditionalCost additionalCost)
         {
             ModelState.Remove("additionalCost.User");
 

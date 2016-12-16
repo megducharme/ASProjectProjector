@@ -74,8 +74,6 @@ namespace ASProjectProjector.Controllers
 
             //projected budget
             
-
-
             return View(model);
         }
             
