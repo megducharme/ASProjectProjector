@@ -17,5 +17,7 @@ namespace ASProjectProjector.Models
     public decimal CostSqFt {get;set;}
     [Required]
     public decimal CountSqFt {get;set;}
+    public decimal TotalCostPerProject{get;set;}
+    
   }
 }

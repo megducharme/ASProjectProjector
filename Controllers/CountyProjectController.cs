@@ -77,6 +77,22 @@ namespace ASProjectProjector.Controllers
                 var user = await GetCurrentUserAsync();
                 countyProject.User = user;
 
+                var materialList =
+                (from mat in context.Material
+                join projectmaterial in context.ProjectTypeMaterial on mat.MaterialId equals projectmaterial.MaterialId
+                join projtype in context.ProjectType on projectmaterial.ProjectTypeId equals projtype.ProjectTypeId
+                where projtype.ProjectTypeId == countyProject.ProjectTypeId
+                select mat).ToList();
+
+                //determine the total material cost based on the sqft the user input and the cost/sqft for each material
+                decimal totalMaterialCost = 0;
+                foreach(var material in materialList)
+                {
+                    totalMaterialCost += (material.CostSqFt * countyProject.ProjectSqFt);
+                }
+
+                countyProject.TotalProjectCost = totalMaterialCost;
+
                 context.Add(countyProject);
 
                 await context.SaveChangesAsync();
