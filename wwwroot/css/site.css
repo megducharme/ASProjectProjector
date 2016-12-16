@@ -53,3 +53,8 @@ textarea {
 {
     text-align: center;
 }
+
+.projdetbtn
+{
+    display: inline-block;
+}
