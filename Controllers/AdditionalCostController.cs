@@ -33,8 +33,32 @@ namespace ASProjectProjector.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> AddAdditionalCost()
+        {
+            AdditionalCostViewModel model = new AdditionalCostViewModel();
+            return View(model);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddCost(AdditionalCost additionalCost)
+        {
+            ModelState.Remove("additionalCost.User");
+
+            if (ModelState.IsValid)
+            {
+                var user = await GetCurrentUserAsync();
+                additionalCost.User = user;
+
+                context.Add(additionalCost);
+
+                await context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index", "AdditionalCost");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveCost(AdditionalCost additionalCost)
         {
             ModelState.Remove("additionalCost.User");
 

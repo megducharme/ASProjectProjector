@@ -81,7 +81,7 @@ namespace ASProjectProjector.Controllers
 
                 await context.SaveChangesAsync();
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "CountyProfile");
         }
 
         
@@ -174,58 +174,7 @@ namespace ASProjectProjector.Controllers
 
                 await context.SaveChangesAsync();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "CountyProfile");
         }
-        [HttpGet]
-        public async Task<IActionResult> AddAdditionalCost()
-        {
-            AdditionalCostViewModel model = new AdditionalCostViewModel();
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> SaveCost(AdditionalCost additionalCost)
-        {
-            ModelState.Remove("additionalCost.User");
-
-            if (ModelState.IsValid)
-            {
-                var user = await GetCurrentUserAsync();
-                additionalCost.User = user;
-
-                context.Add(additionalCost);
-
-                await context.SaveChangesAsync();
-            }
-            return RedirectToAction("Index", "AdditionalCost");
-        }
-
-        // [HttpGet]
-        // public async Task<IActionResult> Index()
-        // {
-        //     var User = await GetCurrentUserAsync();
-        //     var currentUserId = User.Id;
-
-        //     var model = new AllAdditionalCostsViewModel();
-        //     model.AdditionalCost = await context.AdditionalCost
-        //                     .Where(l => l.User.Id == currentUserId).ToListAsync();
-
-        //     return View(model);
-        // }
-
-        [RouteAttribute("CountyProject/Delete/{id}")]
-        [HttpPost("{id}")]
-        public async Task<IActionResult> DeleteCost([FromRoute]int id)
-        {
-            var cost = await context.AdditionalCost
-                .Where(l => l.AdditionalCostId == id).SingleOrDefaultAsync();
-
-                context.Remove(cost);
-
-                await context.SaveChangesAsync();
-
-                return RedirectToAction("Index", "CountyProject");
-        }
-
     }
 }
