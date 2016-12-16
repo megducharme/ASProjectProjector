@@ -70,6 +70,36 @@ namespace ASProjectProjector.Controllers
             return RedirectToAction("Index", "AdditionalCost");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> SaveCost(AdditionalCost additionalCost)
+        {
+            ModelState.Remove("additionalCost.User");
+
+            if (ModelState.IsValid)
+            {
+                var user = await GetCurrentUserAsync();
+                additionalCost.User = user;
+
+                context.Add(additionalCost);
+
+                await context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index", "AdditionalCost");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var User = await GetCurrentUserAsync();
+            var currentUserId = User.Id;
+
+            var model = new AllAdditionalCostsViewModel();
+            model.AdditionalCost = await context.AdditionalCost
+                            .Where(l => l.User.Id == currentUserId).ToListAsync();
+
+            return View(model);
+        }
+
         [RouteAttribute("AdditionalCost/Delete/{id}")]
         [HttpPost("{id}")]
         public async Task<IActionResult> DeleteCost([FromRoute]int id)

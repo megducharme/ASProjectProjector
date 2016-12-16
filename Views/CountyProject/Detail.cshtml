@@ -32,13 +32,13 @@
 <hr>
 @using (Html.BeginForm("Delete", "CountyProject"))
 {
-    <div class="form-group projdetbtn">
+    <div>
         <input type="submit" value="Delete" class="btn btn-default" />
     </div>
 }
 
 <form>
-    <div class="form-group projdetbtn">
+    <div class="form-group">
         <a asp-action="AddAdditionalCost" asp-route-returnurl="/Detail/${@Model.CountyProject.CountyProjectId}" asp-controller="AdditionalCost" class="btn btn-default">Add Cost</a>
     </div>
 </form>
@@ -46,7 +46,7 @@
 
 @if (@Model.CountyProject.Active) {
 <form asp-action="Activate">
-    <div class="form-group projdetbtn">
+    <div class="form-group">
         <div>
             <input type="submit" value="Deactivate" class="btn btn-default" />
         </div>
@@ -56,7 +56,7 @@
 } else { 
 
 <form asp-action="Activate">
-    <div class="form-group projdetbtn">
+    <div class="form-group">
         <div>
             <input type="submit" value="Activate" class="btn btn-default" />
         </div>
