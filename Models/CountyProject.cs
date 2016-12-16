@@ -26,7 +26,7 @@ namespace ASProjectProjector.Models
     public ApplicationUser User { get; set; }
     [Required]
     public decimal ProjectSqFt {get;set;}
-
+    public decimal TotalProjectCost {get;set;}
     public ICollection<AdditionalCost> AdditionalCosts;
   }
 }
