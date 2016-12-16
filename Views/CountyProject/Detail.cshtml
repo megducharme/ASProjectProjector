@@ -8,11 +8,14 @@
 <h4>@Html.DisplayFor(model => model.TotalProjectCost)</h4>
 <br>
 
+@{var totalsqft = @Model.CountyProject.ProjectSqFt;}
+
 @foreach (var item in Model.MaterialList)
 {
+    var totalCostSqFt = item.CostSqFt * totalsqft;
     <div class="row">
         <div class="col-md-3">@Html.DisplayFor(modelItem => item.Name)</div>
-        <div class="col-md-3">@Html.DisplayFor(modelItem => item.CostSqFt)</div>
+        <div class="col-md-3">@totalCostSqFt</div>
         <div class="col-md-3"></div>
         <div class="col-md-3"></div>
     </div>
@@ -30,12 +33,12 @@
 
 <br>
 <hr>
-@using (Html.BeginForm("Delete", "CountyProject"))
-{
-    <div>
-        <input type="submit" value="Delete" class="btn btn-default" />
+
+<form>
+    <div class="form-group">
+        <a asp-action="Delete" asp-controller="CountyProject" class="btn btn-default">Delete</a>
     </div>
-}
+</form>
 
 <form>
     <div class="form-group">
