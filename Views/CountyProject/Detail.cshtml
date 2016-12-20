@@ -15,7 +15,7 @@
     var totalCostSqFt = item.CostSqFt * totalsqft;
     <div class="row">
         <div class="col-md-3">@Html.DisplayFor(modelItem => item.Name)</div>
-        <div class="col-md-3">@totalCostSqFt</div>
+        <div class="col-md-3">@string.Format("{0:C}", totalCostSqFt)</div>
         <div class="col-md-3"></div>
         <div class="col-md-3"></div>
     </div>
@@ -42,7 +42,7 @@
 
 <form>
     <div class="form-group">
-        <a asp-action="AddAdditionalCost" asp-route-returnurl="/Detail/${@Model.CountyProject.CountyProjectId}" asp-controller="AdditionalCost" class="btn btn-default">Add Cost</a>
+        <a asp-action="Create" asp-route-returnurl="/Detail/${@Model.CountyProject.CountyProjectId}" asp-controller="AdditionalCost" class="btn btn-default">Add Cost</a>
     </div>
 </form>
 

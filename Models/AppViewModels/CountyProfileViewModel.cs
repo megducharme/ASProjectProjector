@@ -18,6 +18,9 @@ namespace ASProjectProjector.ViewModels
         [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal RemainingBudget {get;set;}
         public decimal TotalWorkCrews {get;set;}
+        public List<ProjectType> ProjectType {get;set;}
+        [DisplayFormat(DataFormatString = "{0:C}")]
+        public decimal TotalDonations {get;set;}
 
     }
 }

@@ -46,13 +46,6 @@ namespace ASProjectProjector.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> AddAdditionalCost()
-        {
-            AdditionalCostViewModel model = new AdditionalCostViewModel();
-            return View(model);
-        }
-
         [HttpPost]
         public async Task<IActionResult> SaveCost(AdditionalCost additionalCost)
         {

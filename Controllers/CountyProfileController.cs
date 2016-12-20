@@ -55,7 +55,7 @@ namespace ASProjectProjector.Controllers
 
             model.CountyProjectInactive = await context.CountyProject
                 .Where(l => l.Active == false && l.User.Id == currentUserId)
-                .OrderBy(l => l.CodeName).ToListAsync();            
+                .OrderBy(l => l.CodeName).ToListAsync();  
 
             //total budget
             var rcDonations = await context.RestrictedCounty
@@ -71,6 +71,9 @@ namespace ASProjectProjector.Controllers
 
             //reamining budget
             model.RemainingBudget = model.TotalBudget - model.TotalProjectCost;
+
+            //total donations 
+            model.TotalDonations = totalDonations;
 
             //projected budget
             
