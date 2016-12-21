@@ -8,7 +8,7 @@ using ASProjectProjector.Data;
 namespace ASProjectProjector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161216162555_NewMigrations13")]
+    [Migration("20161221013719_NewMigrations13")]
     partial class NewMigrations13
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -143,6 +143,8 @@ namespace ASProjectProjector.Migrations
                         .IsRequired();
 
                     b.Property<int?>("ProjectTypeId");
+
+                    b.Property<decimal>("TotalCostPerProject");
 
                     b.HasKey("MaterialId");
 

@@ -196,7 +196,8 @@ namespace ASProjectProjector.Migrations
                     CostSqFt = table.Column<decimal>(nullable: false),
                     CountSqFt = table.Column<decimal>(nullable: false),
                     Name = table.Column<string>(nullable: false),
-                    ProjectTypeId = table.Column<int>(nullable: true)
+                    ProjectTypeId = table.Column<int>(nullable: true),
+                    TotalCostPerProject = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
