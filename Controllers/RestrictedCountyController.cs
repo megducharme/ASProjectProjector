@@ -27,7 +27,7 @@ namespace ASProjectProjector.Controllers
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             RestrictedCountyViewModel model = new RestrictedCountyViewModel();
             return View(model);

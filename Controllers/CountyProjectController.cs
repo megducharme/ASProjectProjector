@@ -45,7 +45,7 @@ namespace ASProjectProjector.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             var ProjectTypesIdDropDown = context.ProjectType
                                        .OrderBy(l => l.Name)

@@ -108,11 +108,6 @@ namespace ASProjectProjector.Data
                       CountSqFt = 0
                   },
                   new Material {
-                      Name = "Beutle Tape",
-                      CostSqFt = 2.56M,
-                      CountSqFt = 0
-                  },
-                  new Material {
                       Name = "2x6x8 treated",
                       CostSqFt = 4.56M,
                       CountSqFt = 0
@@ -136,28 +131,7 @@ namespace ASProjectProjector.Data
                       Name = "2x6x10",
                       CostSqFt = 3.56M,
                       CountSqFt = 0
-                  },
-                  new Material {
-                      Name = "Beutle Tape ",
-                      CostSqFt = 2.56M,
-                      CountSqFt = 0
-                  },
-                  new Material {
-                      Name = "Beutle Tape ",
-                      CostSqFt = 2.56M,
-                      CountSqFt = 0
-                  },
-                  new Material {
-                      Name = "Beutle Tape ",
-                      CostSqFt = 2.56M,
-                      CountSqFt = 0
-                  },
-                  new Material {
-                      Name = "Beutle Tape ",
-                      CostSqFt = 2.56M,
-                      CountSqFt = 0
-                  },
-
+                  }
               };
               foreach (Material i in materials)
               {
@@ -207,6 +181,38 @@ namespace ASProjectProjector.Data
                 new ProjectTypeMaterial {
                     ProjectTypeId = 1,
                     MaterialId = 4
+                },
+                new ProjectTypeMaterial {
+                    ProjectTypeId = 3,
+                    MaterialId = 7
+                },
+                new ProjectTypeMaterial {
+                    ProjectTypeId = 3,
+                    MaterialId = 11
+                },
+                new ProjectTypeMaterial {
+                    ProjectTypeId = 3,
+                    MaterialId = 13
+                },
+                new ProjectTypeMaterial {
+                    ProjectTypeId = 3,
+                    MaterialId = 14
+                },
+                new ProjectTypeMaterial {
+                    ProjectTypeId = 3,
+                    MaterialId = 15
+                },
+                new ProjectTypeMaterial {
+                    ProjectTypeId = 3,
+                    MaterialId = 16
+                },
+                new ProjectTypeMaterial {
+                    ProjectTypeId = 3,
+                    MaterialId = 19
+                },
+                new ProjectTypeMaterial {
+                    ProjectTypeId = 3,
+                    MaterialId = 22
                 }
             };
             foreach (ProjectTypeMaterial i in materialsForProjects)

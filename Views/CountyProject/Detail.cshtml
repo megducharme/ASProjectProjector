@@ -5,8 +5,10 @@
 <h3>@Html.DisplayFor(model => model.ProjectType.Name)</h3>
 
 <h4>Total Project Cost</h4>
+<h4>SqFt: @Html.DisplayFor(model => model.CountyProject.ProjectSqFt)</h4>
 <h4>@Html.DisplayFor(model => model.TotalProjectCost)</h4>
 <br>
+
 
 @{var totalsqft = @Model.CountyProject.ProjectSqFt;}
 
@@ -46,7 +48,6 @@
     </div>
 </form>
 
-
 @if (@Model.CountyProject.Active) {
 <form asp-action="Activate">
     <div class="form-group">
@@ -66,3 +67,9 @@
     </div>
 </form>
 }
+
+<form>
+    <div class="form-group">
+        <a asp-action="Edit" asp-route-returnurl="/Detail/${@Model.CountyProject.CountyProjectId}" asp-controller="CountyProject" class="btn btn-default">Edit</a>
+    </div>
+</form>

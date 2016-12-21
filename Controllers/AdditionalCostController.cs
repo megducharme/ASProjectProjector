@@ -40,7 +40,7 @@ namespace ASProjectProjector.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             AdditionalCostViewModel model = new AdditionalCostViewModel();
             return View(model);

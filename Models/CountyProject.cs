@@ -25,6 +25,7 @@ namespace ASProjectProjector.Models
     [Required]
     public ApplicationUser User { get; set; }
     [Required]
+    [DisplayFormat(DataFormatString="{0:#.####}")]
     public decimal ProjectSqFt {get;set;}
     public decimal TotalProjectCost {get;set;}
     public ICollection<AdditionalCost> AdditionalCosts;
