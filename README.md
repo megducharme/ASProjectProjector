@@ -7,8 +7,4 @@
    A web application that will help the staff with project cost estimation, projected project duration, budget tracking, and material and tool lists. The application will generate estimations as well as educate the staff on factors that greatly affect project costs. 
 
 # The Application
-The home view is the budget detail view
-- Shows projected budget
-- Shows actual budget
-- Shows number of work crews per week - this field is editable in case groups add a work crew or one crew drops out
-- Shows projects, both active and inactive 
+...is currently under construciton. Check back soon! 
