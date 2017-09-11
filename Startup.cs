@@ -35,19 +35,19 @@ namespace ASProjectProjector
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            // services.AddDbContext<ApplicationDbContext>(options =>
-            //     options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+
+            // string path = System.Environment.GetEnvironmentVariable("ASProjectProjector_Db_Path");
+            // var connection = $"Filename={path}";
+            // Console.WriteLine($"connection = {connection}");
+            // services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connection));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
-
-            string path = System.Environment.GetEnvironmentVariable("ASProjectProjector_Db_Path");
-            var connection = $"Filename={path}";
-            Console.WriteLine($"connection = {connection}");
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connection));
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();

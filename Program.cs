@@ -17,11 +17,11 @@ namespace ASProjectProjector
             BuildWebHost(args).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            Microsoft.AspNetCore.Hosting.WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .UseDefaultServiceProvider(options => 
-                    options.ValidateScopes = false)
-                .Build();
+    public static IWebHost BuildWebHost(string[] args) =>
+        WebHost.CreateDefaultBuilder(args)
+            .UseStartup<Startup>()
+            .UseDefaultServiceProvider(options => 
+                options.ValidateScopes = false)
+            .Build();
     }
 }
