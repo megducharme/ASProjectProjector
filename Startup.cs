@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using ASProjectProjector.Data;
 using ASProjectProjector.Models;
 using ASProjectProjector.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace ASProjectProjector
 {
@@ -23,12 +24,6 @@ namespace ASProjectProjector
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
-
-            if (env.IsDevelopment())
-            {
-                // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
-                builder.AddUserSecrets();
-            }
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
