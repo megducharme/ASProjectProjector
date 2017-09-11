@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using ASProjectProjector.Services;
-using ASProjectProjector.Services;
 
 namespace ASProjectProjector.Services
 {

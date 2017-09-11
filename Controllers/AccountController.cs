@@ -14,7 +14,6 @@ using ASProjectProjector.Models.AccountViewModels;
 using ASProjectProjector.Services;
 using ASProjectProjector.Controllers;
 using System;
-using ASProjectProjector.Services;
 
 namespace ASProjectProjector.Controllers
 {

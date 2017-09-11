@@ -73,7 +73,7 @@ namespace ASProjectProjector
 
             app.UseStaticFiles();
 
-            app.UseIdentity();
+            app.UseAuthentication();
 
             DbInitializer.Initialize(app.ApplicationServices);
 
