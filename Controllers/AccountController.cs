@@ -467,7 +467,7 @@ namespace ASProjectProjector.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(CountyProfileController.Index), "Index");
+                return RedirectToAction(nameof(CountyProfileController.Index), "CountyProfile");
             }
         }
 
