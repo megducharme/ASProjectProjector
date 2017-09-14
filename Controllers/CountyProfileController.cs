@@ -37,6 +37,7 @@ namespace ASProjectProjector.Controllers
 
             //retrieve the staff's projects
             model.CountyProject = await context.CountyProject
+                .Include("ProjectType")
                 .Where(m => m.User.Id == currentUserId && m.Active == true)
                 .ToListAsync();
 
@@ -50,10 +51,12 @@ namespace ASProjectProjector.Controllers
 
             //display active and inactive projects
             model.CountyProjectActive = await context.CountyProject
+                .Include("ProjectType")
                 .Where(l => l.Active == true && l.User.Id == currentUserId)
                 .OrderBy(l => l.CodeName).ToListAsync();
 
             model.CountyProjectInactive = await context.CountyProject
+                .Include("ProjectType")
                 .Where(l => l.Active == false && l.User.Id == currentUserId)
                 .OrderBy(l => l.CodeName).ToListAsync();  
 

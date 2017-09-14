@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -23,12 +23,15 @@ namespace ASProjectProjector.Models.AccountViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
         [Required]
         [Display(Name = "County Name")]
         public string CountyName {get;set;}
+
         [Required]
         [Display(Name = "Homes Figure")]
         public double HomesFigure {get;set;}
+        
         [Required]
         [Display(Name = "Total # of Work Crews")]
         public int TotalWorkCrews {get;set;}

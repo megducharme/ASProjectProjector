@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using ASProjectProjector.Data;
 using ASProjectProjector.Models;
 using ASProjectProjector.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace ASProjectProjector
 {
@@ -24,12 +25,6 @@ namespace ASProjectProjector
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
-            if (env.IsDevelopment())
-            {
-                // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
-                builder.AddUserSecrets();
-            }
-
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -40,19 +35,19 @@ namespace ASProjectProjector
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            // services.AddDbContext<ApplicationDbContext>(options =>
-            //     options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+
+            // string path = System.Environment.GetEnvironmentVariable("ASProjectProjector_Db_Path");
+            // var connection = $"Filename={path}";
+            // Console.WriteLine($"connection = {connection}");
+            // services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connection));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
-
-            string path = System.Environment.GetEnvironmentVariable("ASProjectProjector_Db_Path");
-            var connection = $"Filename={path}";
-            Console.WriteLine($"connection = {connection}");
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connection));
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -78,9 +73,7 @@ namespace ASProjectProjector
 
             app.UseStaticFiles();
 
-            app.UseIdentity();
-
-            DbInitializer.Initialize(app.ApplicationServices);
+            app.UseAuthentication();
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 

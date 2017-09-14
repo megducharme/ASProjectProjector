@@ -59,7 +59,7 @@ namespace ASProjectProjector.Controllers
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation(1, "User logged in.");
@@ -105,7 +105,15 @@ namespace ASProjectProjector.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, CountyName = model.CountyName, TotalWorkCrews = model.TotalWorkCrews, HomesFigure = Convert.ToDecimal(model.HomesFigure) };
+                var user = new ApplicationUser 
+                { 
+                    UserName = model.Email, 
+                    Email = model.Email, 
+                    CountyName = model.CountyName, 
+                    TotalWorkCrews = model.TotalWorkCrews, 
+                    HomesFigure = Convert.ToDecimal(model.HomesFigure) 
+                };
+
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -134,7 +142,7 @@ namespace ASProjectProjector.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation(4, "User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction(nameof(CountyProfileController.Index), "CountyProfile");
         }
 
         //
@@ -459,7 +467,7 @@ namespace ASProjectProjector.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return RedirectToAction(nameof(CountyProfileController.Index), "CountyProfile");
             }
         }
 
