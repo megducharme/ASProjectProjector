@@ -27,7 +27,7 @@
             },
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development",
-                "ASProjectProjector_Db_Path":"/Users/meganducharme/workspace/ASProjectProjector/ASProjectProjector/Data/ASPdatabase.db"
+                "ASProjectProjector_Db_Path":"/Users/meganducharme/workspace/ASProjectProjector/ASProjectProjector.db"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceRoot}/Views"

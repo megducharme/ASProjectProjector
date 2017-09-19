@@ -40,9 +40,10 @@ namespace ASProjectProjector.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
             AdditionalCostViewModel model = new AdditionalCostViewModel();
+            model.CountyProjectId = id;
             return View(model);
         }
 
@@ -55,9 +56,9 @@ namespace ASProjectProjector.Controllers
             {
                 var user = await GetCurrentUserAsync();
                 additionalCost.User = user;
+                additionalCost.CountyProjectId = additionalCost.CountyProjectId;
 
                 context.Add(additionalCost);
-
                 await context.SaveChangesAsync();
             }
             return RedirectToAction("Index", "AdditionalCost");

@@ -114,6 +114,7 @@ namespace ASProjectProjector.Controllers
             ProjectDetailViewModel model = new ProjectDetailViewModel();
 
             model.CountyProject = await context.CountyProject
+                    .Include("AdditionalCosts")
                     .SingleOrDefaultAsync(m => m.CountyProjectId == id);  
 
             var specificProject = model.CountyProject;  
