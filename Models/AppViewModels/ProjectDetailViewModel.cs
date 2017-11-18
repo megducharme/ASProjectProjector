@@ -13,6 +13,5 @@ namespace ASProjectProjector.ViewModels
         public List<Material> MaterialList {get;set;}
         [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal TotalProjectCost {get;set;}
-        public List<AdditionalCost> AdditionalCosts {get;set;}
     }
 }

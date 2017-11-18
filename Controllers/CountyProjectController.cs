@@ -150,7 +150,7 @@ namespace ASProjectProjector.Controllers
                 join ctyprj in context.CountyProject on addcosts.CountyProjectId equals ctyprj.CountyProjectId
                 select addcosts).ToList();
 
-                model.AdditionalCosts = totalAdditionalCosts;
+                // model.CountyProject.AdditionalCosts = totalAdditionalCosts;
 
                 //add up all the addional costs
                 decimal sumAddCosts = 0;
