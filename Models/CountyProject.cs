@@ -33,6 +33,6 @@ namespace ASProjectProjector.Models
     public decimal ProjectSqFt {get;set;}
     [DisplayName("Total Project Cost")]
     public decimal TotalProjectCost {get;set;}
-    public ICollection<AdditionalCost> AdditionalCosts;
+    public virtual ICollection<AdditionalCost> AdditionalCosts {get;set;}
   }
 }

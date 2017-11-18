@@ -40,27 +40,33 @@ namespace ASProjectProjector.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
             AdditionalCostViewModel model = new AdditionalCostViewModel();
+            model.CountyProjectId = id;
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> SaveCost(AdditionalCost additionalCost)
+        public async Task<IActionResult> SaveCost(AdditionalCostViewModel additionalCostViewModel)
         {
             ModelState.Remove("additionalCost.User");
 
             if (ModelState.IsValid)
             {
                 var user = await GetCurrentUserAsync();
-                additionalCost.User = user;
+                AdditionalCost additionalCost = new AdditionalCost()
+                {
+                    User = user,
+                    Description = additionalCostViewModel.AdditionalCost.Description,
+                    CountyProjectId = additionalCostViewModel.CountyProjectId,
+                    Amount = additionalCostViewModel.AdditionalCost.Amount
+                };
 
                 context.Add(additionalCost);
-
                 await context.SaveChangesAsync();
             }
-            return RedirectToAction("Index", "AdditionalCost");
+            return RedirectToAction("Detail", "CountyProject", new {id = additionalCostViewModel.CountyProjectId });
         }
 
         [RouteAttribute("AdditionalCost/Delete/{id}")]
