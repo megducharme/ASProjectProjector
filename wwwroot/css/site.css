@@ -58,3 +58,11 @@ textarea {
 {
     display: inline-block;
 }
+
+.expenses{
+    color:darkred;
+}
+
+.donations{
+    color:darkgreen;
+}

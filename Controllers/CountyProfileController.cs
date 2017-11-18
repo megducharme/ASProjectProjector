@@ -61,7 +61,7 @@ namespace ASProjectProjector.Controllers
                 .OrderBy(l => l.CodeName).ToListAsync();  
 
             //total budget
-            var rcDonations = await context.RestrictedCounty
+            List<RestrictedCounty> rcDonations = await context.RestrictedCounty
                 .Where(l => l.User.Id == currentUserId).ToListAsync();
 
             decimal totalDonations = 0;

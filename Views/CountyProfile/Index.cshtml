@@ -6,11 +6,13 @@
 
 <h3>Quick Reference</h3>
     <h4>Total Funds Avaliable: @Html.DisplayFor(model => model.TotalBudget)</h4>
-    <h4>Total Remaining: @Html.DisplayFor(model => model.RemainingBudget)</h4> 
-    <h4>Projected Budget:</h4>
-    <h4>Actual Budget:</h4>
-    <h4>Total Spending: @Html.DisplayFor(model => model.TotalProjectCost)</h4>
-    <h4>Total Donations: @Html.DisplayFor(model => model.TotalDonations)</h4>
+    <h4 class="expenses">Total Spending: @Html.DisplayFor(model => model.TotalProjectCost)</h4>
+    <h4 class="donations">Total Donations: @Html.DisplayFor(model => model.TotalDonations)</h4><br>
+    @if(Model.TotalProjectCost + Model.TotalDonations > Model.TotalBudget){
+        <h4 class="expenses">Total Remaining: @Html.DisplayFor(model => model.RemainingBudget)</h4> 
+    }else{
+        <h4 class="donations">Total Remaining: @Html.DisplayFor(model => model.RemainingBudget)</h4> 
+    }
 
 <br>
 <hr>

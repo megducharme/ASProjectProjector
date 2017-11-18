@@ -12,6 +12,7 @@
 
 @{var totalsqft = @Model.CountyProject.ProjectSqFt;}
 
+<h4>Material Costs:</h4>
 @foreach (var item in Model.MaterialList)
 {
     var totalCostSqFt = item.CostSqFt * totalsqft;
@@ -23,6 +24,7 @@
     </div>
 }
 
+<h4>Additional Costs:</h4>
 @foreach (var item in Model.CountyProject.AdditionalCosts)
 {
     <div class="row">
